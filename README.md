@@ -54,7 +54,6 @@ The data table displays the image filenames, thumbnails, and corresponding numer
 
 - Filter data by range using the parallel coordinate plot. Select a range on the plot, and the data table will update accordingly.
 - Sort data by clicking on the column headers.
-- Edit cell values directly in the table.
 - Apply native filtering and sorting actions to the table (see https://dash.plotly.com/datatable/filtering for more info).
 - Navigate through pages using pagination controls.
 
