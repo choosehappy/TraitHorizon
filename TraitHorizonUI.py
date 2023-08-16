@@ -9,13 +9,13 @@ import argparse
 parser = argparse.ArgumentParser(description="A dash application for visualizing images with arbitrary numerical features.")
 parser.add_argument("assets_path", type=str, help="The path of the folder containing image files.")
 parser.add_argument("tsv_path", type=str, help="The path of the tsv file. Each row should start with a filename (image1.png) cell, followed by a cell for each feature.")
-# args = parser.parse_args()
+args = parser.parse_args()
 
-assets_path = '/home/jackson/data/img_features_viewer/images'
-tsv_path = '/home/jackson/data/img_features_viewer/sample.tsv'
+# assets_path = '/home/jackson/data/img_features_viewer/images'
+# tsv_path = '/home/jackson/data/img_features_viewer/sample.tsv'
 
-# assets_path = args.assets_path
-# tsv_path = args.tsv_path
+assets_path = args.assets_path
+tsv_path = args.tsv_path
 
 # -----INITIALIZE APP-----
 f_app = flask.Flask(__name__)
