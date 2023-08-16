@@ -35,7 +35,7 @@ To use the Image Features Viewer tool, follow these steps:
     python TraitHorizonUI.py path_to_assets_folder path_to_tsv_file
     ```
 
-    Replace `path_to_assets_folder` with the absolute path to the folder containing image files and `path_to_tsv_file` with the absolute path to the TSV (tab-separated values) file. Each row in the TSV file should start with a filename (e.g., image1.png) followed by numerical feature values.
+    Replace `path_to_assets_folder` with the absolute path to the folder containing image files and `path_to_tsv_file` with the absolute path to the TSV (tab-separated values) file. Each row in the TSV file should start with a filename (e.g., image1.png) followed by numerical feature values. See example.tsv for an example.
 
 3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:8050/`).
 
