@@ -15,7 +15,7 @@ Before using the Image Features Viewer, ensure you have the following components
 
 ## Installation
 
-1. Clone or download the repository containing the Image Features Viewer tool.
+1. Clone or download the repository containing TraitHorizon.
 
 2. Install the required Python packages using the following command:
 
@@ -27,7 +27,7 @@ Before using the Image Features Viewer, ensure you have the following components
 
 To use the Image Features Viewer tool, follow these steps:
 
-1. Open a terminal window and navigate to the directory containing the tool files.
+1. Open a terminal window and navigate to the cloned TraitHorizon repository.
 
 2. Run the application by executing the following command:
 
@@ -35,7 +35,10 @@ To use the Image Features Viewer tool, follow these steps:
     python TraitHorizonUI.py path_to_assets_folder path_to_tsv_file
     ```
 
-    Replace `path_to_assets_folder` with the absolute path to the folder containing image files and `path_to_tsv_file` with the absolute path to the TSV (tab-separated values) file. Each row in the TSV file should start with a filename (e.g., image1.png) followed by numerical feature values. See example.tsv for an example.
+    Try running the following command to try our toy example:
+    ```bash
+    python TraitHorizonUI.py ./example_imgs example.tsv
+    ```
 
 3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:8050/`).
 
@@ -52,7 +55,7 @@ The data table displays the image filenames, thumbnails, and corresponding numer
 - Filter data by range using the parallel coordinate plot. Select a range on the plot, and the data table will update accordingly.
 - Sort data by clicking on the column headers.
 - Edit cell values directly in the table.
-- Apply native filtering and sorting actions to the table.
+- Apply native filtering and sorting actions to the table (see https://dash.plotly.com/datatable/filtering for more info).
 - Navigate through pages using pagination controls.
 
 ## Troubleshooting
