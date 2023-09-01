@@ -1,0 +1,58 @@
+<!doctype html>
+<title>Linking to SlickGrid</title>
+
+<!-- SlickGrid -->
+<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.grid.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery-ui-1.8.16.custom.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/examples.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.pager.css')}}" type="text/css"/>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery-1.7.min.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery.event.drag-2.0.min.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.core.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.grid.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.pager.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.dataview.js')}}"></script>
+<!-- End SlickGrid -->
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='slickgrid_libs/parcoords.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='slickgrid_libs/style.css')}}">
+<style>
+body, html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+}
+#grid, #pager {
+  position: fixed;
+  width: 100%;
+}
+#grid {
+  bottom: 0;
+  height: 300px;
+}
+#pager {
+  bottom: 306px;
+  height: 20px;
+}
+.slick-row:hover {
+  font-weight: bold;
+  color: #069;
+}
+</style>
+<script src="{{url_for('static', filename='slickgrid_libs/d3.v5.min.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/parcoords.standalone.js')}}"></script>
+<script src="{{url_for('static', filename='slickgrid_libs/divgrid.js')}}"></script>
+<div id="upload-button" class="container pt-md-5 text-center" style="display:block;">
+    <label>
+        <span class="btn btn-primary btn-lg">
+            View Results <input id="upload-input" type="file" accept=".tsv" multiple>
+        </span>
+    </label>
+</div>
+<div id="example" class="parcoords"></div>
+<div id="grid"></div>
+<div id="pager"></div>
+<script src="{{url_for('static', filename='js/slickgrid.js')}}" id="brushing" fn="{{fn}}">
+</script>
