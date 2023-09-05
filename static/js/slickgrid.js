@@ -73,6 +73,7 @@ function renderLines(lines) {
 		enableCellNavigation: true,
 		enableColumnReorder: false,
 		multiColumnSort: false,
+		forceFitColumns: true,
 		rowHeight: 100
 	};
 
