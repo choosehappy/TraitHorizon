@@ -2,110 +2,23 @@ $(document).ready(function () {
 	console.log("[LOG] Document ready.")
 	console.log($("#brushing").attr("fn"))
 
-
-	$("#upload-input").change(readFile);
-
+	//call the /tsv endpoint to get a tsv file
+	$.ajax({
+		url: "/tsv",
+		type: "GET",
+		success: function (data) {			
+			renderLines(d3.tsvParse(data));
+		}
+	});
+	
 });
-
-// read the file object, a tsv file, and return the data
-function readFile() {
-	const fileObject = $(this).get(0).files[0]
-	const reader = new FileReader();
-
-	reader.onload = function (event) {
-		const fileContents = event.target.result.split(/#dataset:\s?/)[1];
-		const lines = d3.tsvParse(fileContents, function (d) {  // taken from original HistoQC ui code
-			if (d.hasOwnProperty("")) delete d[""];
-			for (var key in d) {
-				if ($.isNumeric(d[key])) {
-					d[key] = +d[key];
-				}
-			}
-			// add placeholder for cohortfinder results
-			if (!d.hasOwnProperty("embed_x")) d["embed_x"] = null;
-			if (!d.hasOwnProperty("embed_y")) d["embed_y"] = null;
-			// non-negative integers in cohortfinder results
-			if (!d.hasOwnProperty("groupid")) d["groupid"] = -1;
-			// 0 or 1 in cohortfinder results
-			if (!d.hasOwnProperty("testind")) d["testind"] = 2;
-			if (!d.hasOwnProperty("sitecol")) d["sitecol"] = "None";
-			if (!d.hasOwnProperty("labelcol")) d["labelcol"] = "None";
-			return d;
-		});
-
-		original_features = Object.keys(lines[0])
-
-		var DEFAULT_PARAC_ATTRIBUTES = [
-			"levels",
-			"height",
-			"width",
-			"mpp_x",
-			"mpp_y",
-			"Magnification",
-			"pen_markings",
-			"coverslip_edge",
-			"bubble",
-			"nonwhite",
-			"dark",
-			"percent_small_tissue_removed",
-			"percent_small_tissue_filled",
-			"percent_blurry",
-			"spur_pixels",
-			"template1_MSE_hist",
-			"template2_MSE_hist",
-			"template3_MSE_hist",
-			"template4_MSE_hist",
-			"michelson_contrast",
-			"rms_contrast",
-			"grayscale_brightness",
-			"chan1_brightness",
-			"chan2_brightness",
-			"chan3_brightness",
-			"deconv_c0_mean",
-			"deconv_c1_mean",
-			"deconv_c2_mean",
-			"chuv1_brightness_YUV",
-			"chuv2_brightness_YUV",
-			"chuv3_brightness_YUV",
-			"chan1_brightness_YUV",
-			"chan2_brightness_YUV",
-			"chan3_brightness_YUV",
-			"pixels_to_use"
-		];
-
-		current_parallel_attributes = original_features.filter(function (d) {
-			// in DEFAULT_PARAC_ATTRIBUTES and is numeric
-			if (typeof (lines[0][d]) == "number" && DEFAULT_PARAC_ATTRIBUTES.indexOf(d) != -1) {
-				return true;
-			}
-			return false;
-		});
-
-		var newLines = lines.map(function (d) {
-			attr_value_dict = {
-				case_name: d["filename"],
-				gid: d["groupid"]
-			};
-			for (var i = 0; i < current_parallel_attributes.length; i++) {
-				attr_value_dict[current_parallel_attributes[i]] =
-					d[current_parallel_attributes[i]];
-			}
-			return attr_value_dict;
-		});
-
-		renderLines(newLines); // call renderLines whenever the underlying dataset changes. e.g, if the user changes the selected features
-	}
-
-	reader.readAsText(fileObject)
-}
-
 
 
 function renderLines(lines) {
 	var parcoords = ParCoords()("#example")
 		.alpha(0.4)
 		.mode("queue") // progressive rendering
-		.height(d3.max([document.body.clientHeight / 2, 220]))
+		// .height(d3.max([document.body.clientHeight / 2, 220]))
 		.margin({
 			top: 36,
 			left: 0,
@@ -115,18 +28,39 @@ function renderLines(lines) {
 
 	const data = lines;
 	// slickgrid needs each data element to have an id
-	data.forEach(function (d, i) { d.id = d.id || i; });
-	console.log(data)
+	data.forEach(function (d, i) { 
+		d.id = d.id || i; 
+		const url = window.location.origin + "/image/" + d.filename;
+		d.img = `<a href=${url}><img src=${url} style='height:100%'></a>`
+	});
+
 	parcoords
 		.data(data)
-		.hideAxis(["case_name", "gid"])
+		.hideAxis(["filename", "gid", "img"])
 		.render()
 		.reorderable()
 		.brushMode("1D-axes");
 	
 	// setting up grid
 	var column_keys = d3.keys(data[0]);
+
+	function formatter(row, cell, value, columnDef, dataContext) {
+        return value;
+    }
+
 	var columns = column_keys.map(function (key, i) {
+		if (key == "img") {
+			return {
+				id: key,
+				name: key,
+				field: key,
+				sortable: false,
+				// set width
+				width: 300,
+				formatter: formatter
+			}
+		}
+
 		return {
 			id: key,
 			name: key,
@@ -138,7 +72,8 @@ function renderLines(lines) {
 	var options = {
 		enableCellNavigation: true,
 		enableColumnReorder: false,
-		multiColumnSort: false
+		multiColumnSort: false,
+		rowHeight: 100
 	};
 
 	var dataView = new Slick.Data.DataView();

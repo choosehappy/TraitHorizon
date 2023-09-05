@@ -24,35 +24,43 @@ body, html {
   overflow: hidden;
   font-size: 12px;
 }
+#example {
+  position: static;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 40%;
+}
 #grid, #pager {
-  position: fixed;
+  position: static;
   width: 100%;
 }
 #grid {
-  bottom: 0;
-  height: 300px;
+  bottom: 0px;
+  height: 100%;
 }
 #pager {
-  bottom: 306px;
   height: 20px;
 }
 .slick-row:hover {
   font-weight: bold;
   color: #069;
 }
+#slick-container {
+  position: static;
+  left: 0px;
+  width: 100%;
+  height: 60%;
+}
 </style>
 <script src="{{url_for('static', filename='slickgrid_libs/d3.v5.min.js')}}"></script>
 <script src="{{url_for('static', filename='slickgrid_libs/parcoords.standalone.js')}}"></script>
 <script src="{{url_for('static', filename='slickgrid_libs/divgrid.js')}}"></script>
-<div id="upload-button" class="container pt-md-5 text-center" style="display:block;">
-    <label>
-        <span class="btn btn-primary btn-lg">
-            View Results <input id="upload-input" type="file" accept=".tsv" multiple>
-        </span>
-    </label>
-</div>
+<h1>TraitHorizon</h1>
 <div id="example" class="parcoords"></div>
-<div id="grid"></div>
-<div id="pager"></div>
+<div id="slick-container">
+  <div id="grid"></div>
+  <div id="pager"></div>
+</div>
 <script src="{{url_for('static', filename='js/slickgrid.js')}}" id="brushing" fn="{{fn}}">
 </script>
