@@ -9,11 +9,7 @@ html = Blueprint('html', __name__, template_folder='templates')
 
 @html.route('/')
 def index():
-    return "Blank Page"
-
-@html.route('/slickgrid/<fn>')
-def slickgrid(fn):
-    return render_template('index.html', fn=fn)
+    return render_template('index.html')
 
 @html.route('/image/<path:fn>', methods=['GET'])
 def image(fn):

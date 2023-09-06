@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	console.log("[LOG] Document ready.")
-	console.log($("#brushing").attr("fn"))
+	// console.log($("#brushing").attr("fn"))
 
 	//call the /tsv endpoint to get a tsv file
 	$.ajax({
