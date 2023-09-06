@@ -1,6 +1,6 @@
 # TraitHorizon
 
-**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. It allows you to explore and interact with image data through an intuitive user interface, providing both parallel coordinate plots and a data table for exploration.
+**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. The application pairs a parallel coordinate plot with a data table to provide an interactive interface for exploring the data.
 
 ![TraitHorizon Screenshot](TH_screenshot.png)
 ## Prerequisites
@@ -38,19 +38,6 @@ To use the Image Features Viewer tool, follow these steps:
     ```
 
 3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:5000/`).
-
-## Features
-
-### Parallel Coordinate Plot
-
-The Image Features Viewer provides a parallel coordinate plot that displays the relationship between numerical features of the images. Each line in the plot represents an image, and you can interact with it to filter and explore the data.
-
-### Data Table
-
-The data table displays the image filenames, thumbnails, and corresponding numerical feature values. You can perform the following actions with the data table:
-
-- Sort data by clicking on the column headers.
-- Navigate through pages using pagination controls.
 
 ## Contributions
 
