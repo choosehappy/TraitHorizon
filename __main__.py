@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restless import APIManager
+# from flask_restless import APIManager
 import argparse
 
 from HQC_html import html
@@ -20,12 +20,3 @@ if __name__ == '__main__':
     
     app.logger.info('Starting Flask app')
     app.run(host='0.0.0.0', port=5555, debug=False)
-
-    
-'''
-TODO:
-- add cli option to input tsv file path
-- add cli option to input image file path
-- configure csv parsing for example csv
-- add images to slickgrid
-'''

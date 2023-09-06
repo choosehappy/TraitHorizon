@@ -1,17 +1,14 @@
 # TraitHorizon
 
-**TraitHorizon** is a Dash application designed for visualizing images along with arbitrary numerical features. It allows you to explore and interact with image data through an intuitive user interface, providing both parallel coordinate plots and a data table for analysis.
+**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. It allows you to explore and interact with image data through an intuitive user interface, providing both parallel coordinate plots and a data table for exploration.
 
+![TraitHorizon Screenshot](TH_screenshot.png)
 ## Prerequisites
 
 Before using the Image Features Viewer, ensure you have the following components installed:
 
 - Python 3.x
-- Dash
-- Plotly
-- Pandas
 - Flask
-- argparse
 
 ## Installation
 
@@ -20,7 +17,7 @@ Before using the Image Features Viewer, ensure you have the following components
 2. Install the required Python packages using the following command:
 
     ```bash
-    pip install dash plotly pandas flask
+    pip install Flask
     ```
 
 ## Usage
@@ -32,15 +29,15 @@ To use the Image Features Viewer tool, follow these steps:
 2. Run the application by executing the following command:
 
     ```bash
-    python TraitHorizonUI.py path_to_assets_folder path_to_tsv_file
+    python ./ path_to_assets_folder path_to_tsv_file
     ```
 
-    Try running the following command to try our toy example:
+    Run the following command to try TraitHorizon with our toy example:
     ```bash
-    python TraitHorizonUI.py ./example_imgs example.tsv
+    python ./ example_imgs example.tsv
     ```
 
-3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:8050/`).
+3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:5000/`).
 
 ## Features
 
@@ -52,14 +49,8 @@ The Image Features Viewer provides a parallel coordinate plot that displays the 
 
 The data table displays the image filenames, thumbnails, and corresponding numerical feature values. You can perform the following actions with the data table:
 
-- Filter data by range using the parallel coordinate plot. Select a range on the plot, and the data table will update accordingly.
 - Sort data by clicking on the column headers.
-- Apply native filtering and sorting actions to the table (see https://dash.plotly.com/datatable/filtering for more info).
 - Navigate through pages using pagination controls.
-
-## Troubleshooting
-
-If you encounter any issues or have questions, please refer to the official Dash and Plotly documentation for assistance.
 
 ## Contributions
 
