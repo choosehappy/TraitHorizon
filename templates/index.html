@@ -2,20 +2,21 @@
 <title>TraitHorizon</title>
 
 <!-- SlickGrid -->
-<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.grid.css')}}" type="text/css"/>
-<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery-ui-1.8.16.custom.css')}}" type="text/css"/>
-<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/examples.css')}}" type="text/css"/>
-<link rel="stylesheet" href="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.pager.css')}}" type="text/css"/>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery-1.7.min.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/jquery.event.drag-2.0.min.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.core.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.grid.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.pager.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/slickgrid/slick.dataview.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='libs/slickgrid/css/slick.grid.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{url_for('static', filename='libs/slickgrid/css/examples.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{url_for('static', filename='libs/slickgrid/css/slick.pager.css')}}" type="text/css"/>
+
+<script src="{{url_for('static', filename='libs/jquery/js/jquery-1.7.min.js')}}"></script>
+<script src="{{url_for('static', filename='libs/jquery/js/jquery.event.drag-2.0.min.js')}}"></script>
+<script src="{{url_for('static', filename='libs/slickgrid/js/slick.core.js')}}"></script>
+<script src="{{url_for('static', filename='libs/slickgrid/js/slick.grid.js')}}"></script>
+<script src="{{url_for('static', filename='libs/slickgrid/js/slick.pager.js')}}"></script>
+<script src="{{url_for('static', filename='libs/slickgrid/js/slick.dataview.js')}}"></script>
+<!-- <script src="{{url_for('static', filename='libs/js/slickgrid/slick.dataview.js')}}"></script> -->
 <!-- End SlickGrid -->
 
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='slickgrid_libs/parcoords.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='slickgrid_libs/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='libs/parcoords/css/parcoords.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
 <style>
 body, html {
   margin: 0;
@@ -70,14 +71,14 @@ h1 {
   font-weight: bold;
 }
 </style>
-<script src="{{url_for('static', filename='slickgrid_libs/d3.v5.min.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/parcoords.standalone.js')}}"></script>
-<script src="{{url_for('static', filename='slickgrid_libs/divgrid.js')}}"></script>
+
+<script src="{{url_for('static', filename='libs/d3/js/d3.v5.min.js')}}"></script>
+<script src="{{url_for('static', filename='libs/parcoords/js/parcoords.standalone.js')}}"></script>
+<script src="{{url_for('static', filename='js/slickgrid.js')}}" id="brushing"></script>
+
 <div id="banner"><h1>TraitHorizon</h1></div>
 <div id="example" class="parcoords"></div>
 <div id="slick-container">
   <div id="grid"></div>
   <div id="pager"></div>
 </div>
-<script src="{{url_for('static', filename='js/slickgrid.js')}}" id="brushing">
-</script>
