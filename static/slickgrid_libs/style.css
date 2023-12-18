@@ -50,14 +50,16 @@ input {
 
 /*SlickGrid */
 #grid {
-  width: 100% !important;  /* vs jquery resizable */
+  width: 100% !important; 
   height: 260px;
   margin-top: 4px;
+  overflow-x: scroll;
 }
 .slick-header-column {
   font-weight:bold;
   cursor: move;
   border-right: 1px solid #bbb !important;
+
 }
 .slick-cell {
   border: none !important;

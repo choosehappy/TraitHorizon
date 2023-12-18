@@ -5,6 +5,7 @@ import argparse
 from HQC_html import html
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.register_blueprint(html)
 app.logger_name = 'flask'
 

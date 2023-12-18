@@ -69,6 +69,13 @@ function renderLines(lines) {
 		}
 	});
 
+	// Move the img column to the first position
+	var imgColumn = columns.find(function (column) {
+		return column.field === "img";
+	});
+	columns.splice(columns.indexOf(imgColumn), 1);
+	columns.unshift(imgColumn);
+
 	var options = {
 		enableCellNavigation: true,
 		enableColumnReorder: false,
