@@ -73,6 +73,7 @@ function initParcoords(data) {
 
 	var parcoords = ParCoords()("#example")
 	.alpha(0.4)
+	.rate(parseInt(1000 / num_columns))
 	.mode("queue") // progressive rendering
 	// .height(d3.max([document.body.clientHeight / 2, 220]))
 	.width(100 * num_columns)
