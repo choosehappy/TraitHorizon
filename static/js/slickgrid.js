@@ -76,7 +76,7 @@ function initParcoords(data) {
 	.rate(parseInt(1000 / num_columns))
 	.mode("queue") // progressive rendering
 	// .height(d3.max([document.body.clientHeight / 2, 220]))
-	.width(100 * num_columns)
+	.width(50 * num_columns)
 	.margin({
 		top: 36,
 		left: 0,
