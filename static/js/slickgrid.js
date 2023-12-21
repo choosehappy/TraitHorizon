@@ -79,7 +79,7 @@ function initParcoords(data) {
 	// .height(d3.max([document.body.clientHeight / 2, 220]))
 	.width(50 * num_columns)
 	.margin({
-		top: max_key_length * 2,
+		top: max_key_length * 3,
 		left: 15,
 		right: 15,
 		bottom: 16
