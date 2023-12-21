@@ -69,20 +69,23 @@ function initDataView(slickgrid) {
 }
 
 function initParcoords(data) {
+	const max_key_length = d3.max(d3.keys(data[0]).map(function (d) { return d.length; }));
 	const num_columns = d3.keys(data[0]).length;
 
 	var parcoords = ParCoords()("#example")
-	.alpha(0.4)
+	.alpha(0.1)
 	.rate(parseInt(1000 / num_columns))
 	.mode("queue") // progressive rendering
 	// .height(d3.max([document.body.clientHeight / 2, 220]))
 	.width(50 * num_columns)
 	.margin({
-		top: 36,
-		left: 0,
-		right: 0,
+		top: max_key_length * 2,
+		left: 15,
+		right: 15,
 		bottom: 16
 	});
+
+	$("#example").css("width", 50 * num_columns + 30 + "px");
 
 	parcoords
 		.data(data)
@@ -94,6 +97,8 @@ function initParcoords(data) {
 	parcoords.on("brush", function (d) {
 		gridUpdate(d);
 	});
+
+	rotateLabels(parcoords);
 	return parcoords;
 }
 
@@ -242,4 +247,14 @@ function updateParcoords(parcoords, data) {
 	parcoords
 		.data(data)
 		.render();
+}
+
+function rotateLabels(parcoords) {
+	parcoords.svg
+    .selectAll('text.label')
+    .attr(
+      'transform',
+      'translate(0,-10) rotate(-15)'
+    )
+	.attr("text-anchor", "start");
 }
