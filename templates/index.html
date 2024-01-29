@@ -74,11 +74,30 @@
     .tick line {
       opacity: 0.2;
     }
+
+    .tooltip {
+      box-sizing: border-box;
+      position: absolute;
+      display: none;
+      top: 0;
+      left: -100000000px;
+      padding: 8px 12px;
+      font-family: sans-serif;
+      font-size: 12px;
+      color: #333;
+      background-color: #fff;
+      border: 1px solid #333;
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: unset;
+    }
   </style>
 
   <script src="{{url_for('static', filename='libs/d3/js/d3.v5.min.js')}}"></script>
   <script src="{{url_for('static', filename='libs/parcoords/js/parcoords.standalone.js')}}"></script>
   <script src="{{url_for('static', filename='js/slickgrid.js')}}" id="brushing"></script>
+  <script src="{{url_for('static', filename='js/global_vars.js')}}"></script>
 </head>
 
 <body>
@@ -93,8 +112,8 @@
         <div class="card" style="height: 45vh;">
           <!-- THE PARALLEL COORDINATES PLOT -->
           <div class="card-body">
-            <div id="parcoords-parent" style="overflow: scroll; position: relative;">
-              <div id="example" class="parcoords" style="height: 40vh;"></div>
+            <div id="parcoords-parent" style="overflow-x: scroll;">
+              <div id="example" class="parcoords" style="height: 40vh; position: relative;"></div>
             </div>
           </div>
         </div>
