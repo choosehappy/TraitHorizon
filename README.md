@@ -20,6 +20,31 @@ Before using the Image Features Viewer, ensure you have the following components
     pip install Flask
     ```
 
+## Preparing your data
+See `example.tsv` file for an example of how to format your data. The first column should be the filename of the image, and the remaining columns should be the features you want to visualize. The first row should contain the names of the columns.
+
+See `example_with_urls.tsv` for an example of how to include URLs in your data.
+
+
+## CLI
+```
+python3 TraitHorizon --help
+
+usage: [-h] [--reverse_proxy] [--hide_axes HIDE_AXES [HIDE_AXES ...]] assets_path tsv_path
+
+A dash application for visualizing images with arbitrary numerical features.
+
+positional arguments:
+  assets_path           The path of the folder containing image files.
+  tsv_path              The path of the tsv file. Each row should start with a filename (image1.png) cell, followed by a cell for each feature.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --reverse_proxy       Set this flag if the app is behind a reverse proxy.
+  --hide_axes HIDE_AXES [HIDE_AXES ...]
+                        Axes to hide from the parallel coordinates plot in addition to 'filename', 'img', and 'url'.
+```
+
 ## Usage
 
 To use the Image Features Viewer tool, follow these steps:

@@ -143,6 +143,16 @@ function initSlickGrid(parcoords, column_keys, data) {
 			}
 		}
 
+		if (key == "url") {
+			return {
+				id: key,
+				name: key,
+				field: key,
+				sortable: false,
+				formatter: urlFormatter
+			}
+		}
+
 		return {
 			id: key,
 			name: key,
@@ -244,6 +254,10 @@ function initSlickGrid(parcoords, column_keys, data) {
 
 	function formatter(row, cell, value, columnDef, dataContext) {
 		return value;
+	}
+
+	function urlFormatter(row, cell, value, columnDef, dataContext) {
+		return "<a href='" + value + "' target='_blank'>" + value + "</a>";
 	}
 
 	function toggleFilterRow() {
