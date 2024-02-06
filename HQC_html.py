@@ -22,3 +22,7 @@ def image(fn):
 def tsv():
     # read tsv from file system and send over http
     return send_file(current_app.config['tsv_path'])
+
+@html.route('/hide_axes', methods=['GET'])
+def hide_axes():
+    return json.dumps(current_app.config['hide_axes'])

@@ -2,6 +2,7 @@ const DATA_VIEW = new Slick.Data.DataView();
 var ORIGINAL_DATASET = [];
 let SEARCH_STRING = "";
 var PARCOORDS;
+var HIDE_AXES = [];
 
 
 $(document).ready(function () {
@@ -9,14 +10,24 @@ $(document).ready(function () {
 	// console.log($("#brushing").attr("fn"))
 
 	//call the /tsv endpoint to get a tsv file
+
 	$.ajax({
-		url: "./tsv",
+		url: "./hide_axes",
 		type: "GET",
 		success: function (data) {
-			ORIGINAL_DATASET = d3.tsvParse(data)
-			renderLines();
+			HIDE_AXES = JSON.parse(data);
+			$.ajax({
+				url: "./tsv",
+				type: "GET",
+				success: function (data) {
+					ORIGINAL_DATASET = d3.tsvParse(data)
+					renderLines();
+				}
+			});
 		}
-	});
+	})
+
+
 
 });
 
@@ -104,7 +115,7 @@ function initParcoords(data) {
 
 	PARCOORDS
 		.data(data)
-		.hideAxis(["filename", "gid", "img", "patientID"])
+		.hideAxis(HIDE_AXES)
 		.render()
 		.reorderable()
 		.brushMode("1D-axes");
