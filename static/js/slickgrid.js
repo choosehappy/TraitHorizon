@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 	//call the /tsv endpoint to get a tsv file
 	$.ajax({
-		url: "/tsv",
+		url: "./tsv",
 		type: "GET",
 		success: function (data) {
 			ORIGINAL_DATASET = d3.tsvParse(data)
@@ -24,7 +24,7 @@ $(document).ready(function () {
 function renderLines() {
 	ORIGINAL_DATASET.forEach(function (d, i) {
 		d.id = d.id || i;
-		const url = window.location.origin + "/image/" + d.filename;
+		const url = "./image/" + d.filename;
 		d.img = `<a href=${url}><img src=${url} style='height:100%'></a>`
 	});
 
