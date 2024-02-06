@@ -3,6 +3,7 @@ var ORIGINAL_DATASET = [];
 let SEARCH_STRING = "";
 var PARCOORDS;
 var HIDE_AXES = [];
+var FILTER_BY = "";
 
 
 $(document).ready(function () {
@@ -71,7 +72,7 @@ function renderLines() {
 
 function initDataView(slickgrid) {
 	function myFilter(item, args) {
-		if (args.searchString != "" && item["patientID"].indexOf(args.searchString) == -1) {
+		if (args.searchString != "" && item[FILTER_BY].toString().indexOf(args.searchString) == -1) {
 			return false;
 		}
 		return true;
@@ -90,6 +91,8 @@ function initDataView(slickgrid) {
 
 	DATA_VIEW.setFilter(myFilter)
 }
+
+
 
 function initParcoords(data) {
 	const max_key_length = d3.max(d3.keys(data[0]).map(function (d) { return d.length; }));
@@ -208,6 +211,15 @@ function initSlickGrid(parcoords, column_keys, data) {
 		SEARCH_STRING = this.value;
 		updateFilter();
 		updateParcoords(parcoords, DATA_VIEW.getFilteredItems());
+	});
+	const filterSelect = d3.select("#filter-select");
+	FILTER_BY = column_keys[0];
+	for (let key of column_keys) {
+		filterSelect.append("option").attr("value", key).text(key);
+	}
+
+	filterSelect.on("change", function () {
+		FILTER_BY = this.value;
 	});
 
 	// column sorting
