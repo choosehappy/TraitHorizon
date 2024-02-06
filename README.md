@@ -39,6 +39,9 @@ To use the Image Features Viewer tool, follow these steps:
 
 3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:5000/`).
 
+## Proxy Configuration
+If you are hosting TraitHorizon behind a reverse proxy, pass the `--reverse-proxy` flag.
+
 ## Contributions
 
 Contributions to the Image Features Viewer tool are welcome. Feel free to fork the repository, make improvements, and submit pull requests.
