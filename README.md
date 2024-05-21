@@ -1,17 +1,14 @@
 # TraitHorizon
 
-**TraitHorizon** is a Dash application designed for visualizing images along with arbitrary numerical features. It allows you to explore and interact with image data through an intuitive user interface, providing both parallel coordinate plots and a data table for analysis.
+**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. The application pairs a parallel coordinate plot with a data table to provide an interactive interface for exploring the data.
 
+![TraitHorizon Screenshot](TH_screenshot.png)
 ## Prerequisites
 
 Before using the Image Features Viewer, ensure you have the following components installed:
 
 - Python 3.x
-- Dash
-- Plotly
-- Pandas
 - Flask
-- argparse
 
 ## Installation
 
@@ -20,8 +17,33 @@ Before using the Image Features Viewer, ensure you have the following components
 2. Install the required Python packages using the following command:
 
     ```bash
-    pip install dash plotly pandas flask
+    pip install Flask
     ```
+
+## Preparing your data
+See `example.tsv` file for an example of how to format your data. The first column should be the filename of the image, and the remaining columns should be the features you want to visualize. The first row should contain the names of the columns.
+
+See `example_with_urls.tsv` for an example of how to include URLs in your data.
+
+
+## CLI
+```
+python3 TraitHorizon --help
+
+usage: [-h] [--reverse_proxy] [--hide_axes HIDE_AXES [HIDE_AXES ...]] assets_path tsv_path
+
+A dash application for visualizing images with arbitrary numerical features.
+
+positional arguments:
+  assets_path           The path of the folder containing image files.
+  tsv_path              The path of the tsv file. Each row should start with a filename (image1.png) cell, followed by a cell for each feature.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --reverse_proxy       Set this flag if the app is behind a reverse proxy.
+  --hide_axes HIDE_AXES [HIDE_AXES ...]
+                        Axes to hide from the parallel coordinates plot in addition to 'filename', 'img', and 'url'.
+```
 
 ## Usage
 
@@ -32,34 +54,18 @@ To use the Image Features Viewer tool, follow these steps:
 2. Run the application by executing the following command:
 
     ```bash
-    python TraitHorizonUI.py path_to_assets_folder path_to_tsv_file
+    python ./ path_to_assets_folder path_to_tsv_file
     ```
 
-    Try running the following command to try our toy example:
+    Run the following command to try TraitHorizon with our toy example:
     ```bash
-    python TraitHorizonUI.py ./example_imgs example.tsv
+    python ./ example_imgs example.tsv
     ```
 
-3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:8050/`).
+3. Once the application is running, open a web browser and go to the provided URL (usually `http://127.0.0.1:5000/`).
 
-## Features
-
-### Parallel Coordinate Plot
-
-The Image Features Viewer provides a parallel coordinate plot that displays the relationship between numerical features of the images. Each line in the plot represents an image, and you can interact with it to filter and explore the data.
-
-### Data Table
-
-The data table displays the image filenames, thumbnails, and corresponding numerical feature values. You can perform the following actions with the data table:
-
-- Filter data by range using the parallel coordinate plot. Select a range on the plot, and the data table will update accordingly.
-- Sort data by clicking on the column headers.
-- Apply native filtering and sorting actions to the table (see https://dash.plotly.com/datatable/filtering for more info).
-- Navigate through pages using pagination controls.
-
-## Troubleshooting
-
-If you encounter any issues or have questions, please refer to the official Dash and Plotly documentation for assistance.
+## Proxy Configuration
+If you are hosting TraitHorizon behind a reverse proxy, pass the `--reverse-proxy` flag.
 
 ## Contributions
 
