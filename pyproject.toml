@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools >= 64", "setuptools_scm >= 8", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ----------------------------------------------------------------------------------
+[project]
+name = "traithorizon"
+license = {file = "LICENSE.txt"}
+authors = [{name = "Jackson Jacobs"}, {name = "Fan Fan"}, {name = "Laura Barisoni"}, {name = "Andrew Janowczyk"}]
+maintainers = [{name = "Jackson Jacobs"}, {name = "Fan Fan"}]
+description = "TraitHorizon is a web-based tool for visualizing images alongside numerical features."
+readme = {file = "README.md", content-type = "text/markdown"}
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Scientific/Engineering :: Digital Pathology",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Utilities",
+    "Operating System :: Unix"
+]
+
+requires-python = ">=3.8"
+dependencies = [
+    "Flask~=3.0.3",
+    "pytest~=8.3.4",
+    "pytest-cov~=6.0.0",
+]
+
+dynamic = ["version"]
+
+# ----------------------------------------------------------------------------------
+[project.urls]
+Homepage = "https://github.com/choosehappy/TraitHorizon"
+
+# ----------------------------------------------------------------------------------
+[project.scripts]
+run_module = "traithorizon.__main__:main"
+
+# ----------------------------------------------------------------------------------
+[tool.setuptools_scm]
+version_file = "traithorizon/_version.py"
+
+# ----------------------------------------------------------------------------------
+[tool.pytest.ini_options]
+addopts = "-v"
+
+# ----------------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["traithorizon"]
+
+# ----------------------------------------------------------------------------------

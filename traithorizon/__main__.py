@@ -2,7 +2,7 @@ from flask import Flask
 # from flask_restless import APIManager
 import argparse
 
-from HQC_html import html
+from traithorizon.routes import html
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
