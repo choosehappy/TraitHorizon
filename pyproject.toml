@@ -42,7 +42,7 @@ Homepage = "https://github.com/choosehappy/TraitHorizon"
 
 # ----------------------------------------------------------------------------------
 [project.scripts]
-run_module = "traithorizon.__main__:main"
+traithorizon = "traithorizon.__main__:main"
 
 # ----------------------------------------------------------------------------------
 [tool.setuptools_scm]
