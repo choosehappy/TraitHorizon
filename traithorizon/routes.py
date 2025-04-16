@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, current_app, send_file, send_from_directory
+from flask import render_template, Blueprint, current_app, send_file
 
 
 # import command to stringify a json object

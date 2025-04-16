@@ -2,7 +2,7 @@ from flask import Flask
 # from flask_restless import APIManager
 import argparse
 
-from HQC_html import html
+from traithorizon.routes import html
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.register_blueprint(html)
 app.logger_name = 'flask'
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description="A dash application for visualizing images with arbitrary numerical features.")
     parser.add_argument("assets_path", type=str, help="The path of the folder containing image files.")
     parser.add_argument("tsv_path", type=str, help="The path of the tsv file. Each row should start with a filename (image1.png) cell, followed by a cell for each feature.")
@@ -28,3 +28,6 @@ if __name__ == '__main__':
     
     app.logger.info('Starting Flask app')
     app.run(host='0.0.0.0', port=5555, debug=False)
+
+if __name__ == '__main__':
+    main()
