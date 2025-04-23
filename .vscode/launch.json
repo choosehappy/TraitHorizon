@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Launch Firefox against localhost",
+            "url": "http://localhost:5555",
+            "webRoot": "${workspaceFolder}/traithorizon/static",
+            "pathMappings": [
+                {
+                    "url": "http://localhost:5555/static/js",
+                    "path": "${workspaceFolder}/traithorizon/static/js"
+                },
+                {
+                    "url": "http://localhost:5555/static/libs",
+                    "path": "${workspaceFolder}/traithorizon/static/libs"
+                },
+                {
+                    "url": "http://localhost:5555/static/css",
+                    "path": "${workspaceFolder}/traithorizon/static/css"
+                }
+            ]
+        },
+        {
+            "name": "Python Debugger: Module",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "traithorizon"
+        }
+    ]
+}
