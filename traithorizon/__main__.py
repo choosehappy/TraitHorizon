@@ -11,7 +11,7 @@ app.register_blueprint(html)
 app.logger_name = 'flask'
 
 def main():
-    parser = argparse.ArgumentParser(description="A dash application for visualizing images with arbitrary numerical features.")
+    parser = argparse.ArgumentParser(description="A web application for visualizing images with arbitrary numerical features.")
     parser.add_argument("assets_path", type=str, help="The path of the folder containing image files.")
     parser.add_argument("tsv_path", type=str, help="The path of the tsv file. Each row should start with a filename (image1.png) cell, followed by a cell for each feature.")
     parser.add_argument("--reverse_proxy", action="store_true", help="Set this flag if the app is behind a reverse proxy.")
