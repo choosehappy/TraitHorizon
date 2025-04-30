@@ -1,6 +1,9 @@
 Installation Guide
 ==================
 
+Install from Source
+-------------------
+
 Follow these steps to install and set up TraitHorizon:
 
 1. **Clone the Repository**
@@ -12,7 +15,7 @@ Follow these steps to install and set up TraitHorizon:
       git clone https://github.com/your-repo/TraitHorizon.git
       cd TraitHorizon
 
-2. **Set Up a Virtual Environment**
+2. **(Optional) Set Up a Virtual Environment**
 
    It is recommended to use a virtual environment to manage dependencies:
 
