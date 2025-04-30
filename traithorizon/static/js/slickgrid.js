@@ -5,7 +5,6 @@ var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
 
-
 $(document).ready(function () {
 	console.log("[LOG] Document ready.")
 	// console.log($("#brushing").attr("fn"))
@@ -21,7 +20,7 @@ $(document).ready(function () {
 				url: "./tsv",
 				type: "GET",
 				success: function (data) {
-					ORIGINAL_DATASET = d3.tsvParse(data)
+					ORIGINAL_DATASET = d3.tsvParse(data, d3.autoType);
 					renderLines();
 				}
 			});
@@ -31,7 +30,6 @@ $(document).ready(function () {
 
 
 });
-
 
 function renderLines() {
 	ORIGINAL_DATASET.forEach(function (d, i) {

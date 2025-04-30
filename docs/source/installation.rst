@@ -35,7 +35,7 @@ Follow these steps to install and set up TraitHorizon:
 
    .. code-block:: bash
 
-      python -m traithorizon --help
+      traithorizon --help
 
    This should display the CLI usage instructions.
 

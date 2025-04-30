@@ -27,7 +27,7 @@ Usage Example
 --------------------------------
 .. code-block:: bash
 
-   traithorizon examples/imgs examples/example.tsv
+   traithorizon examples/imgs examples/tubule_example.tsv
 
 
 Reverse Proxy
