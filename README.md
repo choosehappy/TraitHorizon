@@ -5,7 +5,7 @@
 ![TraitHorizon Screenshot](docs/source/_static/images/TH_screenshot.png)
 
 ## Documentation
-The documentation for TraitHorizon is available at [TraitHorizon Documentation](https://traithorizon.readthedocs.io/en/latest/). It includes detailed instructions on installation, usage, and customization.
+The documentation for TraitHorizon is available [here](https://traithorizon.readthedocs.io/en/latest/). It includes detailed instructions on installation, usage, and customization.
 
 ## License
-This project is licensed under The Clear BSD License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under The Clear BSD License. See the [LICENSE](LICENSE.txt) file for details.
