@@ -25,4 +25,5 @@ def tsv():
 
 @html.route('/hide_axes', methods=['GET'])
 def hide_axes():
-    return json.dumps(current_app.config['hide_axes'])
+    from flask import jsonify
+    return jsonify({'hide_axes': current_app.config['hide_axes']}), 200
