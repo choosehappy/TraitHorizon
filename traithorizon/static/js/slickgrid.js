@@ -15,7 +15,7 @@ $(document).ready(function () {
 		url: "./hide_axes",
 		type: "GET",
 		success: function (data) {
-			HIDE_AXES = JSON.parse(data);
+			HIDE_AXES = data.hide_axes;
 			$.ajax({
 				url: "./tsv",
 				type: "GET",
