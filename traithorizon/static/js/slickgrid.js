@@ -188,6 +188,9 @@ function initSlickGrid(parcoords, column_keys, data) {
 	var pager = new Slick.Controls.Pager(DATA_VIEW, grid, $("#pager"));
 	var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
+	// initialize the export ids button
+	initExportGridIdsButton();
+
 	// initialize the search panel
 	let topPanel = grid.getTopPanel();
 	const topPanelLeftElm = document.querySelector("#inlineFilterPanel");
@@ -203,8 +206,6 @@ function initSlickGrid(parcoords, column_keys, data) {
 		// clear on Esc
 		if (e.which == 27) {
 			this.value = "";
-
-
 		}
 		SEARCH_STRING = this.value;
 		updateFilter();
@@ -255,7 +256,6 @@ function initSlickGrid(parcoords, column_keys, data) {
 		parcoords.unhighlight();
 	});
 
-
 	// helper functions
 	function comparer(a, b) {
 		var x = a[sortcol], y = b[sortcol];
@@ -275,6 +275,32 @@ function initSlickGrid(parcoords, column_keys, data) {
 	}
 
 	return { grid, pager };
+}
+
+function initExportGridIdsButton() {
+	const gridParent = document.getElementById('slickgrid-header');
+	const exportBtn = document.createElement('button');
+	exportBtn.textContent = 'Export Filtered TSV Row IDs';
+	exportBtn.style.margin = '8px';
+	exportBtn.onclick = exportGridIds;
+	gridParent.insertBefore(exportBtn, gridParent.lastChild);
+}
+
+function exportGridIds() {
+	const filteredItems = DATA_VIEW.getFilteredItems();
+	let tsv = 'id\n';
+	filteredItems.forEach(item => {
+		tsv += item.id + '\n';
+	});
+	const blob = new Blob([tsv], { type: 'text/tab-separated-values' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'filtered_row_ids.tsv';
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
 }
 
 function gridUpdate(data) {
