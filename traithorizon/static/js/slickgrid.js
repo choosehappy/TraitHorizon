@@ -5,13 +5,14 @@ var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
 const BRUSH_MODE = "1D-axes"; // Possible values: "1D-axes", "1D-axes-multi" https://github.com/BigFatDog/parcoords-es
+const JSON_TABSIZE = 2;
 
 $(document).ready(function () {
 	console.log("[LOG] Document ready.");
 
 	// Initialize Dropzone for filter import
 	initFilterDropzone();
-
+	initExportFilterExtentsButton();
 	//call the /tsv endpoint to get a tsv file
 	$.ajax({
 		url: "./hide_axes",
@@ -158,12 +159,27 @@ function initParcoords(data) {
 }
 
 function getParcoordsFilterExtents() {
-	return PARCOORDS.brushExtents().extents;
+	const brushExtents = PARCOORDS.brushExtents();
+	if (BRUSH_MODE == "1D-axes-multi") {
+		console.log("1D-axes-multi brush mode not yet implemented");
+	} else if (BRUSH_MODE == "1D-axes") {
+		// Handle 1D-axes brush mode
+		const extents = {};
+		for (const key in brushExtents) {
+			const sel = brushExtents[key];
+			if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
+				extents[key] = sel.selection.scaled.slice(0, 2).reverse();
+			}
+		}
+		return extents;
+	}
 }
 
 function setParcoordsFilterExtents(extents) {
 	console.log("[LOG] Setting parcoords filter extents:", extents);
-	return PARCOORDS.brushExtents(extents).render();
+	PARCOORDS.brushMode(BRUSH_MODE);
+	PARCOORDS.brushExtents(extents);
+	PARCOORDS.renderBrushed();
 }
 
 function initSlickGrid(parcoords, column_keys, data) {
@@ -326,6 +342,28 @@ function updateFilter() {
 		searchString: SEARCH_STRING
 	});
 	DATA_VIEW.refresh();
+}
+
+function initExportFilterExtentsButton() {
+	const gridParent = document.getElementById('dropzone-parent');
+	const exportBtn = document.createElement('button');
+	exportBtn.textContent = 'Export Filter Extents';
+	exportBtn.style.margin = '8px';
+	exportBtn.onclick = exportFilterExtents;
+	gridParent.insertBefore(exportBtn, gridParent.lastChild);
+}
+
+function exportFilterExtents() {
+	const extents = getParcoordsFilterExtents();
+	console.log("Exporting filter extents:", extents);
+	const blob = new Blob([JSON.stringify(extents, null, JSON_TABSIZE)], { type: 'application/json' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'filter_extents.json';
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
 }
 
 function updateParcoords(parcoords, data) {
@@ -607,26 +645,31 @@ function tooltip(selectionGroup, tooltipDiv) {
 
 	function renderAxisMetrics(selectedContainer, data, yDomainLabel, height) {
 		const rowHeight = 10;
-		const numbers = data.map(d => d[yDomainLabel])
+		const numbers = data.map(d => d[yDomainLabel]);
+		const fixedPrecision = 3;
+
+		// Calculate standard deviation only if there are at least 2 numbers
+		const deviation = numbers.length > 1 ? d3.deviation(numbers).toFixed(fixedPrecision) : undefined;
+
+		// Calculate mean only if there are at least 1 numbers
+		const mean = numbers.length > 0 ? d3.mean(numbers).toFixed(fixedPrecision) : undefined;
 
 		const metrics = [
 			{ label: 'Count', value: data.length },
-			{ label: 'Mean', value: d3.mean(numbers).toFixed(3) },
-			{ label: 'Std', value: d3.deviation(numbers).toFixed(3) },
+			{ label: 'Mean', value: mean },
+			{ label: 'Std', value: deviation },
 			{ label: 'Min', value: d3.min(numbers) },
 			{ label: 'Max', value: d3.max(numbers) },
-		]
+		];
 
-		var htmlContent = ""
+		var htmlContent = "";
 		metrics.forEach((d, i) => {
 			htmlContent += `<b>${d.label}:</b> ${d.value} `;
-		})
+		});
 
 		selectedContainer
 			.append('p')
-			.html(htmlContent)
-
-
+			.html(htmlContent);
 	}
 
 }
