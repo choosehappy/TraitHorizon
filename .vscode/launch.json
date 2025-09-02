@@ -26,7 +26,11 @@
             "name": "Python Debugger: Module",
             "type": "debugpy",
             "request": "launch",
-            "module": "traithorizon"
+            "module": "traithorizon",
+            "args": [
+                "examples/imgs",
+                "examples/tubule_example.tsv"
+            ]
         }
     ]
 }
