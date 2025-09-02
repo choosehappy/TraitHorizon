@@ -4,13 +4,15 @@ let SEARCH_STRING = "";
 var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
+const BRUSH_MODE = "1D-axes"; // Possible values: "1D-axes", "1D-axes-multi" https://github.com/BigFatDog/parcoords-es
 
 $(document).ready(function () {
-	console.log("[LOG] Document ready.")
-	// console.log($("#brushing").attr("fn"))
+	console.log("[LOG] Document ready.");
+
+	// Initialize Dropzone for filter import
+	initFilterDropzone();
 
 	//call the /tsv endpoint to get a tsv file
-
 	$.ajax({
 		url: "./hide_axes",
 		type: "GET",
@@ -25,11 +27,38 @@ $(document).ready(function () {
 				}
 			});
 		}
-	})
-
-
-
+	});
 });
+
+function initFilterDropzone() {
+	if (window.Dropzone) {
+		Dropzone.autoDiscover = false;
+		var filterDropzone = new Dropzone("#filter-dropzone", {
+			url: "#", // No actual upload
+			autoProcessQueue: false,
+			acceptedFiles: ".json",
+			maxFiles: 1,
+			addRemoveLinks: true,
+			dictDefaultMessage: "Drop filter JSON file here or click to upload",
+			init: function () {
+				this.on("addedfile", function (file) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						try {
+							var extents = JSON.parse(e.target.result);
+							setParcoordsFilterExtents(extents);
+						} catch (err) {
+							alert("Invalid JSON file: " + err);
+						}
+					};
+					reader.readAsText(file);
+				});
+			}
+		});
+	} else {
+		console.warn("Dropzone.js not loaded.");
+	}
+}
 
 function renderLines() {
 	ORIGINAL_DATASET.forEach(function (d, i) {
@@ -119,13 +148,22 @@ function initParcoords(data) {
 		.hideAxis(HIDE_AXES)
 		.render()
 		.reorderable()
-		.brushMode("1D-axes");
+		.brushMode(BRUSH_MODE);
 
 	PARCOORDS.on("brush", function (d) {
 		gridUpdate(d);
 	});
 
 	rotateLabels(PARCOORDS);
+}
+
+function getParcoordsFilterExtents() {
+	return PARCOORDS.brushExtents().extents;
+}
+
+function setParcoordsFilterExtents(extents) {
+	console.log("[LOG] Setting parcoords filter extents:", extents);
+	return PARCOORDS.brushExtents(extents).render();
 }
 
 function initSlickGrid(parcoords, column_keys, data) {
