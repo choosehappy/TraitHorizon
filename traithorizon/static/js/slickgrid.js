@@ -4,7 +4,12 @@ let SEARCH_STRING = "";
 var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
-const BRUSH_MODE = "1D-axes"; // Possible values: "1D-axes", "1D-axes-multi" https://github.com/BigFatDog/parcoords-es
+const BRUSH_MODES = {
+	ONE_D_AXES: "1D-axes",
+	ONE_D_AXES_MULTI: "1D-axes-multi"
+};
+const BRUSH_MODE = BRUSH_MODES.ONE_D_AXES;	// Change this to switch brush modes
+
 const JSON_TABSIZE = 2;
 
 $(document).ready(function () {
@@ -159,20 +164,30 @@ function initParcoords(data) {
 }
 
 function getParcoordsFilterExtents() {
-	const brushExtents = PARCOORDS.brushExtents();
-	if (BRUSH_MODE == "1D-axes-multi") {
-		console.log("1D-axes-multi brush mode not yet implemented");
-	} else if (BRUSH_MODE == "1D-axes") {
-		// Handle 1D-axes brush mode
-		const extents = {};
-		for (const key in brushExtents) {
-			const sel = brushExtents[key];
-			if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
-				extents[key] = sel.selection.scaled.slice(0, 2).reverse();
+		const brushExtents = PARCOORDS.brushExtents();
+		if (BRUSH_MODE == BRUSH_MODES.ONE_D_AXES_MULTI) {
+			// Support for multi axes-formatted extents
+			const extents = {};
+			for (const key in brushExtents) {
+				const arr = brushExtents[key];
+				if (Array.isArray(arr) && arr.length > 0) {
+					extents[key] = arr
+						.filter(obj => obj && obj.selection && Array.isArray(obj.selection.scaled))
+						.map(obj => obj.selection.scaled.slice(0, 2).reverse());
+				}
 			}
+			return extents;
+		} else if (BRUSH_MODE == BRUSH_MODES.ONE_D_AXES) {
+			// Handle 1D-axes brush mode
+			const extents = {};
+			for (const key in brushExtents) {
+				const sel = brushExtents[key];
+				if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
+					extents[key] = sel.selection.scaled.slice(0, 2).reverse();
+				}
+			}
+			return extents;
 		}
-		return extents;
-	}
 }
 
 function setParcoordsFilterExtents(extents) {
