@@ -4,6 +4,7 @@ let SEARCH_STRING = "";
 var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
+const STATS_FIXED_PRECISION = 3; // Number of decimal places for statistics
 const BRUSH_MODES = {
 	ONE_D_AXES: "1D-axes",
 	ONE_D_AXES_MULTI: "1D-axes-multi"
@@ -45,7 +46,7 @@ function initFilterDropzone() {
 			acceptedFiles: ".json",
 			maxFiles: 1,
 			addRemoveLinks: true,
-			dictDefaultMessage: "Drop filter JSON file here or click to upload",
+			dictDefaultMessage: "Drop settings JSON file here or click to upload",
 			init: function () {
 				this.on("addedfile", function (file) {
 					var reader = new FileReader();
@@ -54,7 +55,7 @@ function initFilterDropzone() {
 							var extents = JSON.parse(e.target.result);
 							setParcoordsFilterExtents(extents);
 						} catch (err) {
-							alert("Invalid JSON file: " + err);
+							alert("Invalid JSON file. Please ensure the file contains valid settings data.\n\nError details: " + err); ;
 						}
 					};
 					reader.readAsText(file);
@@ -105,7 +106,7 @@ function renderLines() {
 
 function initDataView(slickgrid) {
 	function myFilter(item, args) {
-		if (args.searchString != "" && item[FILTER_BY].toString().indexOf(args.searchString) == -1) {
+		if (args.searchString !== "" && item[FILTER_BY].toString().indexOf(args.searchString) === -1) {
 			return false;
 		}
 		return true;
@@ -165,7 +166,7 @@ function initParcoords(data) {
 
 function getParcoordsFilterExtents() {
 		const brushExtents = PARCOORDS.brushExtents();
-		if (BRUSH_MODE == BRUSH_MODES.ONE_D_AXES_MULTI) {
+		if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES_MULTI) {
 			// Support for multi axes-formatted extents
 			const extents = {};
 			for (const key in brushExtents) {
@@ -177,7 +178,7 @@ function getParcoordsFilterExtents() {
 				}
 			}
 			return extents;
-		} else if (BRUSH_MODE == BRUSH_MODES.ONE_D_AXES) {
+		} else if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES) {
 			// Handle 1D-axes brush mode
 			const extents = {};
 			for (const key in brushExtents) {
@@ -201,7 +202,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 	// setting up grid
 
 	var columns = column_keys.map(function (key, i) {
-		if (key == "img") {
+		if (key === "img") {
 			return {
 				id: key,
 				name: key,
@@ -213,7 +214,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 			}
 		}
 
-		if (key == "url") {
+		if (key === "url") {
 			return {
 				id: key,
 				name: key,
@@ -270,7 +271,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 	$("#txtSearch").keyup(function (e) {
 		gridUpdate(ORIGINAL_DATASET);
 		// clear on Esc
-		if (e.which == 27) {
+		if (e.which === 27) {
 			this.value = "";
 
 
@@ -328,7 +329,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 	// helper functions
 	function comparer(a, b) {
 		var x = a[sortcol], y = b[sortcol];
-		return (x == y ? 0 : (x > y ? 1 : -1));
+		return (x === y ? 0 : (x > y ? 1 : -1));
 	}
 
 	function formatter(row, cell, value, columnDef, dataContext) {
@@ -663,18 +664,12 @@ function tooltip(selectionGroup, tooltipDiv) {
 		const numbers = data.map(d => d[yDomainLabel]);
 		const fixedPrecision = 3;
 
-		// Calculate standard deviation only if there are at least 2 numbers
-		const deviation = numbers.length > 1 ? d3.deviation(numbers).toFixed(fixedPrecision) : undefined;
-
-		// Calculate mean only if there are at least 1 numbers
-		const mean = numbers.length > 0 ? d3.mean(numbers).toFixed(fixedPrecision) : undefined;
-
 		const metrics = [
 			{ label: 'Count', value: data.length },
-			{ label: 'Mean', value: mean },
-			{ label: 'Std', value: deviation },
-			{ label: 'Min', value: d3.min(numbers) },
-			{ label: 'Max', value: d3.max(numbers) },
+			{ label: 'Mean', value: postProcessStats(d3.mean(numbers)) },
+			{ label: 'Std', value: postProcessStats(d3.deviation(numbers)) },
+			{ label: 'Min', value: postProcessStats(d3.min(numbers)) },
+			{ label: 'Max', value: postProcessStats(d3.max(numbers)) },
 		];
 
 		var htmlContent = "";
@@ -685,6 +680,16 @@ function tooltip(selectionGroup, tooltipDiv) {
 		selectedContainer
 			.append('p')
 			.html(htmlContent);
+	}
+
+	/**
+	 * Formats a statistic value to a fixed decimal precision or returns "N/A" if undefined.
+	 *
+	 * @param {number|undefined} statistic - The statistic value to format.
+	 * @returns {string} The formatted statistic as a string, or "N/A" if the value is undefined.
+	 */
+	function postProcessStats(statistic) {
+		return statistic !== undefined ? statistic.toFixed(STATS_FIXED_PRECISION) : "N/A";
 	}
 
 }
