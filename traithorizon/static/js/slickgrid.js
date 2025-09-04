@@ -11,14 +11,14 @@ const BRUSH_MODES = {
 };
 const BRUSH_MODE = BRUSH_MODES.ONE_D_AXES;	// Change this to switch brush modes
 
-const JSON_TABSIZE = 2;
+const JSON_TABSIZE = 3;
 
 $(document).ready(function () {
 	console.log("[LOG] Document ready.");
 
 	// Initialize Dropzone for filter import
-	initFilterDropzone();
-	initExportFilterExtentsButton();
+	initSettingsDropzone();
+	initExportSettingsButton();
 	//call the /tsv endpoint to get a tsv file
 	$.ajax({
 		url: "./hide_axes",
@@ -37,25 +37,26 @@ $(document).ready(function () {
 	});
 });
 
-function initFilterDropzone() {
+function initSettingsDropzone() {
 	if (window.Dropzone) {
 		Dropzone.autoDiscover = false;
-		var filterDropzone = new Dropzone("#filter-dropzone", {
+		var settingsDropzone = new Dropzone("#settings-dropzone", {
 			url: "#", // No actual upload
 			autoProcessQueue: false,
 			acceptedFiles: ".json",
 			maxFiles: 1,
-			addRemoveLinks: true,
-			dictDefaultMessage: "Drop settings JSON file here or click to upload",
+			addRemoveLinks: false, // Don't show remove links
+			previewsContainer: false, // Don't display file preview
 			init: function () {
 				this.on("addedfile", function (file) {
 					var reader = new FileReader();
 					reader.onload = function (e) {
 						try {
-							var extents = JSON.parse(e.target.result);
-							setParcoordsFilterExtents(extents);
+							var jsonData = JSON.parse(e.target.result);
+							var filterSettings = jsonData.filterSettings;
+							setParcoordsFilterSettings(filterSettings);
 						} catch (err) {
-							alert("Invalid JSON file. Please ensure the file contains valid settings data.\n\nError details: " + err); ;
+							alert("Invalid JSON file. Please ensure the file contains valid settings data.\n\nError details: " + err);
 						}
 					};
 					reader.readAsText(file);
@@ -164,37 +165,40 @@ function initParcoords(data) {
 	rotateLabels(PARCOORDS);
 }
 
-function getParcoordsFilterExtents() {
-		const brushExtents = PARCOORDS.brushExtents();
-		if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES_MULTI) {
-			// Support for multi axes-formatted extents
-			const extents = {};
-			for (const key in brushExtents) {
-				const arr = brushExtents[key];
-				if (Array.isArray(arr) && arr.length > 0) {
-					extents[key] = arr
-						.filter(obj => obj && obj.selection && Array.isArray(obj.selection.scaled))
-						.map(obj => obj.selection.scaled.slice(0, 2).reverse());
-				}
+function getParcoordsFilterSettings() {
+	const brushExtents = PARCOORDS.brushExtents();
+	const filterSettings = {};
+	if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES_MULTI) {
+		// Support for multi axes-formatted extents
+		for (const key in brushExtents) {
+			const arr = brushExtents[key];
+			if (Array.isArray(arr) && arr.length > 0) {
+				filterSettings[key] = arr
+					.filter(obj => obj && obj.selection && Array.isArray(obj.selection.scaled))
+					.map(obj => obj.selection.scaled.slice(0, 2).reverse());
 			}
-			return extents;
-		} else if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES) {
-			// Handle 1D-axes brush mode
-			const extents = {};
-			for (const key in brushExtents) {
-				const sel = brushExtents[key];
-				if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
-					extents[key] = sel.selection.scaled.slice(0, 2).reverse();
-				}
-			}
-			return extents;
 		}
+		return filterSettings;
+	} else if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES) {
+		// Handle 1D-axes brush mode
+		for (const key in brushExtents) {
+			const sel = brushExtents[key];
+			if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
+				filterSettings[key] = sel.selection.scaled.slice(0, 2).reverse();
+			}
+		}
+		return filterSettings;
+	}
 }
 
-function setParcoordsFilterExtents(extents) {
-	console.log("[LOG] Setting parcoords filter extents:", extents);
+function getFilteredRowIds() {
+	return DATA_VIEW.getFilteredItems().map(d => d.id);
+}
+
+function setParcoordsFilterSettings(filterSettings) {
+	console.log("[LOG] Setting parcoords filter settings:", filterSettings);
 	PARCOORDS.brushMode(BRUSH_MODE);
-	PARCOORDS.brushExtents(extents);
+	PARCOORDS.brushExtents(filterSettings);
 	PARCOORDS.renderBrushed();
 }
 
@@ -360,23 +364,26 @@ function updateFilter() {
 	DATA_VIEW.refresh();
 }
 
-function initExportFilterExtentsButton() {
+function initExportSettingsButton() {
 	const gridParent = document.getElementById('dropzone-parent');
 	const exportBtn = document.createElement('button');
-	exportBtn.textContent = 'Export Filter Extents';
+	exportBtn.textContent = 'Export Settings';
 	exportBtn.style.margin = '8px';
-	exportBtn.onclick = exportFilterExtents;
+	exportBtn.onclick = exportSettings;
 	gridParent.insertBefore(exportBtn, gridParent.lastChild);
 }
 
-function exportFilterExtents() {
-	const extents = getParcoordsFilterExtents();
-	console.log("Exporting filter extents:", extents);
-	const blob = new Blob([JSON.stringify(extents, null, JSON_TABSIZE)], { type: 'application/json' });
+function exportSettings() {
+	const settings = {
+		filterSettings: getParcoordsFilterSettings(),
+		filteredRowIds: getFilteredRowIds()
+	};
+
+	const blob = new Blob([JSON.stringify(settings, null, JSON_TABSIZE)], { type: 'application/json' });
 	const url = URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.href = url;
-	a.download = 'filter_extents.json';
+	a.download = 'settings.json';
 	document.body.appendChild(a);
 	a.click();
 	document.body.removeChild(a);
