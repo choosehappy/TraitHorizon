@@ -77,3 +77,15 @@ We use `d3.autotype <https://d3js.org/d3-dsv#autoType>`_ to infer types while pa
    - Scientific notation: ``1.23e4``, ``-5.67E-8``
 
 Other formats may work but may produce unexpected plotting results. We recommend excluding these columns using the ``--hide_axes`` flag.
+
+
+Building Docs Locally
+---------------------
+To build the documentation locally, follow these steps:
+
+.. code-block:: bash
+
+   python3 -m pip install -r docs/requirements.txt
+   sphinx-autobuild docs/source docs/_build/html
+
+Then follow the link provided in the terminal to view the docs in your web browser.
