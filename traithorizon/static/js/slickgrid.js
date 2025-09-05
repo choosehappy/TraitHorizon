@@ -68,6 +68,31 @@ function initSettingsDropzone() {
 	}
 }
 
+function initExportSettingsButton() {
+	const gridParent = document.getElementById('dropzone-parent');
+	const exportBtn = document.createElement('button');
+	exportBtn.textContent = 'Export Filter Settings';
+	exportBtn.style.margin = '8px';
+	exportBtn.onclick = exportSettings;
+	gridParent.insertBefore(exportBtn, gridParent.lastChild);
+}
+
+function exportSettings() {
+	const settings = {
+		filterSettings: getParcoordsFilterSettings(),
+		filteredRowIds: getFilteredRowIds()
+	};
+
+	const blob = new Blob([JSON.stringify(settings, null, JSON_TABSIZE)], { type: 'application/json' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'settings.json';
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+}
+
 function renderLines() {
 	ORIGINAL_DATASET.forEach(function (d, i) {
 		d.id = d.id || i;
@@ -362,31 +387,6 @@ function updateFilter() {
 		searchString: SEARCH_STRING
 	});
 	DATA_VIEW.refresh();
-}
-
-function initExportSettingsButton() {
-	const gridParent = document.getElementById('dropzone-parent');
-	const exportBtn = document.createElement('button');
-	exportBtn.textContent = 'Export Settings';
-	exportBtn.style.margin = '8px';
-	exportBtn.onclick = exportSettings;
-	gridParent.insertBefore(exportBtn, gridParent.lastChild);
-}
-
-function exportSettings() {
-	const settings = {
-		filterSettings: getParcoordsFilterSettings(),
-		filteredRowIds: getFilteredRowIds()
-	};
-
-	const blob = new Blob([JSON.stringify(settings, null, JSON_TABSIZE)], { type: 'application/json' });
-	const url = URL.createObjectURL(blob);
-	const a = document.createElement('a');
-	a.href = url;
-	a.download = 'settings.json';
-	document.body.appendChild(a);
-	a.click();
-	document.body.removeChild(a);
 }
 
 function updateParcoords(parcoords, data) {
