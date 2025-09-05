@@ -12,7 +12,7 @@ Follow these steps to install and set up TraitHorizon:
 
    .. code-block:: bash
 
-      git clone https://github.com/your-repo/TraitHorizon.git
+      git clone https://github.com/choosehappy/TraitHorizon.git
       cd TraitHorizon
 
 2. **(Optional) Set Up a Virtual Environment**
