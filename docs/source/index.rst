@@ -23,6 +23,10 @@ License
 
 TraitHorizon is provided under the `MIT License <https://opensource.org/licenses/MIT>`_.
 
+Links
+-----
+Github: https://github.com/choosehappy/TraitHorizon
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
