@@ -4,13 +4,22 @@ let SEARCH_STRING = "";
 var PARCOORDS;
 var HIDE_AXES = [];
 var FILTER_BY = "";
+const STATS_FIXED_PRECISION = 3; // Number of decimal places for statistics
+const BRUSH_MODES = {
+	ONE_D_AXES: "1D-axes",
+	ONE_D_AXES_MULTI: "1D-axes-multi"
+};
+const BRUSH_MODE = BRUSH_MODES.ONE_D_AXES;	// Change this to switch brush modes
+
+const JSON_TABSIZE = 3;
 
 $(document).ready(function () {
-	console.log("[LOG] Document ready.")
-	// console.log($("#brushing").attr("fn"))
+	console.log("[LOG] Document ready.");
 
+	// Initialize Dropzone for filter import
+	initSettingsDropzone();
+	initExportSettingsButton();
 	//call the /tsv endpoint to get a tsv file
-
 	$.ajax({
 		url: "./hide_axes",
 		type: "GET",
@@ -25,11 +34,64 @@ $(document).ready(function () {
 				}
 			});
 		}
-	})
-
-
-
+	});
 });
+
+function initSettingsDropzone() {
+	if (window.Dropzone) {
+		Dropzone.autoDiscover = false;
+		var settingsDropzone = new Dropzone("#settings-dropzone", {
+			url: "#", // No actual upload
+			autoProcessQueue: false,
+			acceptedFiles: ".json",
+			maxFiles: 1,
+			addRemoveLinks: false, // Don't show remove links
+			previewsContainer: false, // Don't display file preview
+			init: function () {
+				this.on("addedfile", function (file) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						try {
+							var jsonData = JSON.parse(e.target.result);
+							var filterSettings = jsonData.filterSettings;
+							setParcoordsFilterSettings(filterSettings);
+						} catch (err) {
+							alert("Invalid JSON file. Please ensure the file contains valid settings data.\n\nError details: " + err);
+						}
+					};
+					reader.readAsText(file);
+				});
+			}
+		});
+	} else {
+		console.warn("Dropzone.js not loaded.");
+	}
+}
+
+function initExportSettingsButton() {
+	const gridParent = document.getElementById('dropzone-parent');
+	const exportBtn = document.createElement('button');
+	exportBtn.textContent = 'Export Filter Settings';
+	exportBtn.style.margin = '8px';
+	exportBtn.onclick = exportSettings;
+	gridParent.insertBefore(exportBtn, gridParent.lastChild);
+}
+
+function exportSettings() {
+	const settings = {
+		filterSettings: getParcoordsFilterSettings(),
+		filteredRowIds: getFilteredRowIds()
+	};
+
+	const blob = new Blob([JSON.stringify(settings, null, JSON_TABSIZE)], { type: 'application/json' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'settings.json';
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+}
 
 function renderLines() {
 	ORIGINAL_DATASET.forEach(function (d, i) {
@@ -70,7 +132,7 @@ function renderLines() {
 
 function initDataView(slickgrid) {
 	function myFilter(item, args) {
-		if (args.searchString != "" && item[FILTER_BY].toString().indexOf(args.searchString) == -1) {
+		if (args.searchString !== "" && item[FILTER_BY].toString().indexOf(args.searchString) === -1) {
 			return false;
 		}
 		return true;
@@ -119,7 +181,7 @@ function initParcoords(data) {
 		.hideAxis(HIDE_AXES)
 		.render()
 		.reorderable()
-		.brushMode("1D-axes");
+		.brushMode(BRUSH_MODE);
 
 	PARCOORDS.on("brush", function (d) {
 		gridUpdate(d);
@@ -128,11 +190,48 @@ function initParcoords(data) {
 	rotateLabels(PARCOORDS);
 }
 
+function getParcoordsFilterSettings() {
+	const brushExtents = PARCOORDS.brushExtents();
+	const filterSettings = {};
+	if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES_MULTI) {
+		// Support for multi axes-formatted extents
+		for (const key in brushExtents) {
+			const arr = brushExtents[key];
+			if (Array.isArray(arr) && arr.length > 0) {
+				filterSettings[key] = arr
+					.filter(obj => obj && obj.selection && Array.isArray(obj.selection.scaled))
+					.map(obj => obj.selection.scaled.slice(0, 2).reverse());
+			}
+		}
+		return filterSettings;
+	} else if (BRUSH_MODE === BRUSH_MODES.ONE_D_AXES) {
+		// Handle 1D-axes brush mode
+		for (const key in brushExtents) {
+			const sel = brushExtents[key];
+			if (sel && sel.selection && Array.isArray(sel.selection.scaled)) {
+				filterSettings[key] = sel.selection.scaled.slice(0, 2).reverse();
+			}
+		}
+		return filterSettings;
+	}
+}
+
+function getFilteredRowIds() {
+	return DATA_VIEW.getFilteredItems().map(d => d.id);
+}
+
+function setParcoordsFilterSettings(filterSettings) {
+	console.log("[LOG] Setting parcoords filter settings:", filterSettings);
+	PARCOORDS.brushMode(BRUSH_MODE);
+	PARCOORDS.brushExtents(filterSettings);
+	PARCOORDS.renderBrushed();
+}
+
 function initSlickGrid(parcoords, column_keys, data) {
 	// setting up grid
 
 	var columns = column_keys.map(function (key, i) {
-		if (key == "img") {
+		if (key === "img") {
 			return {
 				id: key,
 				name: key,
@@ -144,7 +243,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 			}
 		}
 
-		if (key == "url") {
+		if (key === "url") {
 			return {
 				id: key,
 				name: key,
@@ -201,7 +300,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 	$("#txtSearch").keyup(function (e) {
 		gridUpdate(ORIGINAL_DATASET);
 		// clear on Esc
-		if (e.which == 27) {
+		if (e.which === 27) {
 			this.value = "";
 
 
@@ -259,7 +358,7 @@ function initSlickGrid(parcoords, column_keys, data) {
 	// helper functions
 	function comparer(a, b) {
 		var x = a[sortcol], y = b[sortcol];
-		return (x == y ? 0 : (x > y ? 1 : -1));
+		return (x === y ? 0 : (x > y ? 1 : -1));
 	}
 
 	function formatter(row, cell, value, columnDef, dataContext) {
@@ -569,26 +668,35 @@ function tooltip(selectionGroup, tooltipDiv) {
 
 	function renderAxisMetrics(selectedContainer, data, yDomainLabel, height) {
 		const rowHeight = 10;
-		const numbers = data.map(d => d[yDomainLabel])
+		const numbers = data.map(d => d[yDomainLabel]);
+		const fixedPrecision = 3;
 
 		const metrics = [
 			{ label: 'Count', value: data.length },
-			{ label: 'Mean', value: d3.mean(numbers).toFixed(3) },
-			{ label: 'Std', value: d3.deviation(numbers).toFixed(3) },
-			{ label: 'Min', value: d3.min(numbers) },
-			{ label: 'Max', value: d3.max(numbers) },
-		]
+			{ label: 'Mean', value: postProcessStats(d3.mean(numbers)) },
+			{ label: 'Std', value: postProcessStats(d3.deviation(numbers)) },
+			{ label: 'Min', value: postProcessStats(d3.min(numbers)) },
+			{ label: 'Max', value: postProcessStats(d3.max(numbers)) },
+		];
 
-		var htmlContent = ""
+		var htmlContent = "";
 		metrics.forEach((d, i) => {
 			htmlContent += `<b>${d.label}:</b> ${d.value} `;
-		})
+		});
 
 		selectedContainer
 			.append('p')
-			.html(htmlContent)
+			.html(htmlContent);
+	}
 
-
+	/**
+	 * Formats a statistic value to a fixed decimal precision or returns "N/A" if undefined.
+	 *
+	 * @param {number|undefined} statistic - The statistic value to format.
+	 * @returns {string} The formatted statistic as a string, or "N/A" if the value is undefined.
+	 */
+	function postProcessStats(statistic) {
+		return statistic !== undefined ? statistic.toFixed(STATS_FIXED_PRECISION) : "N/A";
 	}
 
 }
