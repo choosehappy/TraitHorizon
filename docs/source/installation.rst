@@ -13,7 +13,7 @@ The recommended way to install TraitHorizon is via Docker. You can run a traitho
 
       Replace `[HOST_DIRECTORY]` and `[CONTAINER_DIRECTORY]` with the appropriate paths on your host and in the container, respectively.
 
-This will start a new container and will open an interactive terminal from which you can run TraitHorizon commands. Please see the :doc:`usage` section for instructions on how to use TraitHorizon.
+This will pull the latest image from the `TraitHorizon DockerHub repository <https://hub.docker.com/r/histotools/traithorizon>`_ and start a new container with an interactive terminal for running TraitHorizon commands. Please see the :doc:`usage` section for instructions on how to use TraitHorizon.
 
 Install using pip
 -------------------
