@@ -16,7 +16,7 @@ This will pull the latest image from the [TraitHorizon DockerHub repository](htt
 ## Install using pip
 While we recommend using Docker for most users, some may prefer installing TraitHorizon from source for development or customization purposes.
 
-Follow these steps to install and set up TraitHorizon using :
+Follow these steps to install and set up TraitHorizon:
 
 1. **Clone the Repository**
 
