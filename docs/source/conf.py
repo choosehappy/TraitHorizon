@@ -19,6 +19,13 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx_design',
+    'myst_parser',
+]
+
+# Configure MyST parser
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
 ]
 
 templates_path = ['_templates']
