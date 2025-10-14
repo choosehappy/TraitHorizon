@@ -49,7 +49,7 @@ The TSV (Tab-Separated Values) file used by traithorizon should adhere to the fo
 4. **Example**:
    Below is an example of a valid TSV file:
 
-   ```tsv
+   ```
    filename    TBM_AREA    TE_AREA    LUMEN_AREA
    image1.png  144.37      228.36     245.46
    image2.png  454.83      3436.57    280.17
