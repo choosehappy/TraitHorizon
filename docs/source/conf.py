@@ -19,7 +19,13 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx_design',
+    'myst_parser',
 ]
+
+# Allow .md files as source
+source_suffix = {
+    ".md": "markdown",
+}
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
