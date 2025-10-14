@@ -19,8 +19,8 @@ Contributions are welcome! Feel free to fork the repository, make improvements, 
 TraitHorizon is provided under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Links
-- Github: https://github.com/choosehappy/TraitHorizon
-- Docker Hub: https://hub.docker.com/r/histotools/traithorizon
+- Github: [https://github.com/choosehappy/TraitHorizon]()
+- Docker Hub: [https://hub.docker.com/r/histotools/traithorizon]()
 
 ```{toctree}
 :maxdepth: 2
