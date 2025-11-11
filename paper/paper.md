@@ -7,8 +7,8 @@ tags:
 authors:
 authors:
     - name: Jackson Jacobs
-    equal-contrib: true
-    affiliation: "1"
+        - equal-contrib: true
+        - affiliation: "1"
     - name: Fan Fan
     equal-contrib: true
     affiliation: "1"
@@ -30,7 +30,6 @@ affiliations:
     index: 5
 date: 11 November 2025
 bibliography: paper.bib
-
 ---
 
 # TraitHorizon: Scalable Exploration of Large Image-Feature Paired Datasets
