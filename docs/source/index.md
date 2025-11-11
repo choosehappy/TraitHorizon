@@ -30,4 +30,5 @@ installation
 usage
 api
 unit_testing
+paper
 ```
