@@ -6,18 +6,18 @@ tags:
     - quality control
 authors:
 - name: Jackson Jacobs
-  orcid: 
+  orcid: 0009-0002-7386-6596
   equal-contrib: true
   affiliation: "1"
 - name: Fan Fan
-  orcid: 
+  orcid: 0009-0006-8897-5348
   equal-contrib: true
   affiliation: "1"
 - name: Laura Barisoni
-  orcid:
+  orcid: 0000-0003-0848-9683
   affiliation: "2, 3"
 - name: Andrew Janowczyk
-  orcid: 
+  orcid: 0000-0003-2982-4321
   corresponding: true
   affiliation: "1, 4, 5"
 affiliations:
