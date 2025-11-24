@@ -28,6 +28,5 @@ TraitHorizon is provided under the [MIT License](https://opensource.org/licenses
 
 installation
 usage
-api
 unit_testing
 ```
