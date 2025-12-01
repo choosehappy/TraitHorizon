@@ -1,6 +1,6 @@
 # TraitHorizon
 
-**TraitHorizon** is a web application designed for visualizing images alongside arbitrary numerical features. The application pairs a parallel coordinate plot with a data table to provide an interactive interface for exploring the data.
+**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. It combines a parallel coordinate plot with a data table to provide an interactive interface for exploring your data.
 
 ![TraitHorizon Screenshot](docs/source/_static/images/TH_screenshot.png)
 
