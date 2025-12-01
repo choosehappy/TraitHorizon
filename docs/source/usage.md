@@ -80,3 +80,12 @@ sphinx-autobuild docs/source docs/_build/html
 ```
 
 Then follow the link provided in the terminal to view the docs in your web browser.
+
+## Building the Paper PDF locally
+Run this command in the TraitHorizon directory to build the paper PDF locally:
+
+```bash
+docker run --rm --volume $PWD/paper:/data --user $(id -u):$(id -g) --env JOURNAL=joss openjournals/inara
+```
+
+Once complete, the paper will be located at `paper/paper.pdf`

@@ -4,17 +4,21 @@
 The recommended way to install TraitHorizon is via Docker. You can run a traithorizon container with a single command:
 
 ```bash
-docker run -it -p 5555:5555 -v [HOST_DIRECTORY]:[CONTAINER_DIRECTORY] histotools/traithorizon:latest /bin/bash
+docker run -it -p 5555:5555 -v [HOST_DIRECTORY]:[CONTAINER_DIRECTORY] histotools/traithorizon:main /bin/bash
 ```
 
 ```{note}
-Replace `[HOST_DIRECTORY]` and `[CONTAINER_DIRECTORY]` with the appropriate paths on your host and in the container, respectively.
+Replace `[HOST_DIRECTORY]` and `[CONTAINER_DIRECTORY]` with the appropriate paths on your host and in the container, respectively. For an example use case, you can omit the -v flag altogether to run the container without mounting any directories.
 ```
 
 This will pull the latest image from the [TraitHorizon DockerHub repository](https://hub.docker.com/r/histotools/traithorizon) and start a new container with an interactive terminal for running TraitHorizon commands. Please see the {doc}`usage` section for instructions on how to use TraitHorizon.
 
 ## Install using pip
 While we recommend using Docker for most users, some may prefer installing TraitHorizon from source for development or customization purposes.
+
+```{note}
+TraitHorizon has been tested using Python 3.10 and may not be compatible with other versions.
+```
 
 Follow these steps to install and set up TraitHorizon:
 
