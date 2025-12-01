@@ -49,6 +49,10 @@ traithorizon = "traithorizon.__main__:main"
 version_file = "traithorizon/_version.py"
 
 # ----------------------------------------------------------------------------------
+[tool.setuptools]
+packages = ["traithorizon"]
+
+# ----------------------------------------------------------------------------------
 [tool.pytest.ini_options]
 addopts = "-v"
 
