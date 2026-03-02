@@ -97,7 +97,7 @@ TraitHorizon is available as a Python package on PyPI and as a Docker image, pro
 
 # AI usage disclosure
 
-No generative AI tools were used in the development of the TraitHorizon software, its documentation, or the original manuscript. Claude Opus 4 (Anthropic), accessed via GitHub Copilot in VS Code, was used solely to assist with restructuring and condensing the manuscript to meet the updated JOSS format and word limit requirements. All AI-generated text was reviewed, edited, and validated by the human authors, who made all decisions regarding scientific content and framing.
+No generative AI tools were used in the development of the TraitHorizon software, its documentation, or the original manuscript. Claude Opus 4 (Anthropic) was used solely to assist with restructuring and condensing the manuscript to meet the updated JOSS format and word limit requirements. All AI-generated text was reviewed, edited, and validated by the human authors, who made all decisions regarding scientific content and framing.
 
 # Acknowledgements
 
