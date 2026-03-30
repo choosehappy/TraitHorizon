@@ -41,7 +41,7 @@ Collections of Objects of Interest (OOIs)—such as cells, tubules, or tissue pa
 
 TraitHorizon is a browser-based visualization platform for interactive exploration of large OOI–feature pair datasets. It integrates three synchronized visualization components: (a) a parallel coordinates plot for feature-vector–level exploration, (b) dynamic violin plots for per-feature distribution analysis, and (c) a tabular data grid linking each feature vector to its corresponding object image. Its interactive interface enables real-time, scalable visualization of datasets containing hundreds of thousands of OOI-feature pairs. We demonstrate TraitHorizon's utility through a quality control case study involving 260,201 segmented kidney tubules, each characterized by 99 features, illustrating how the platform facilitates rapid, interpretable, and reproducible data interrogation.
 
-TraitHorizon is publicly available at [https://traithorizon.com/](https://traithorizon.com/). The extended paper is available at [https://traithorizon.com/paper/paper_extended.pdf](https://traithorizon.com/paper/paper_extended.pdf). TraitHorizon is available as a Python package on PyPI and as a Docker image, providing straightforward installation across computing environments.
+TraitHorizon is publicly available at [https://traithorizon.com/](https://traithorizon.com/). The extended paper is available at [https://github.com/choosehappy/TraitHorizon/blob/main/paper/paper_extended.pdf](https://github.com/choosehappy/TraitHorizon/blob/main/paper/paper_extended.pdf). TraitHorizon is available as a Python package on PyPI and as a Docker image, providing straightforward installation across computing environments.
 
 # Statement of need
 
