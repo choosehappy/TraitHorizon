@@ -223,6 +223,7 @@ function getFilteredRowIds() {
 function setParcoordsFilterSettings(filterSettings) {
 	console.log("[LOG] Setting parcoords filter settings:", filterSettings);
 	PARCOORDS.brushMode(BRUSH_MODE);
+	PARCOORDS.brushReset();
 	PARCOORDS.brushExtents(filterSettings);
 	PARCOORDS.renderBrushed();
 }
