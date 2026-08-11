@@ -30,10 +30,42 @@ options:
 ```
 
 ## Usage Example
-
+The following command will run TraitHorizon with example data.
 ```bash
 traithorizon examples/imgs examples/tubule_example.tsv
 ```
+
+Video demo:
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/sk-AHsd7A2g?si=7akaAAG6UeEyBOwp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+This demo features [custom filter](importing-filters) being imported into the TraitHorizon user interface. The filtered dataset highlights a subpopulation of histologic objects with low TBM_SMOOTH_20, a quantitative feature. By isolating the histologic objects of interest, their corresponding features and images can be evaluated for biological or quality-related patterns.
+
+## Applying sorting
+Quantitative features can be sorted within the data grid by clicking on the corresponding colunns in the grid header.
+
+## Applying manual filters
+Filters can be applied manually by holding down your left mouse button and dragging along an axis within the parallel coordinates plot. Conversely, click the axis to clear an individual filter. Refreshing the page will reset all filters.
+
+## Importing Filters
+You can import filters by dropping a compatible `.json` file into UI dropbox:
+![alt text](_static/images/dropbox.png)
+
+Any existing filters will be cleared when importing filters.
+
+Compatible `.json` files have the following structure. The `filterSettings` value should contain key-value pairs, with each key corresponding to a column name (see [TSV File Format](tsv-file-format)) each value corresponding to a floating point range:
+
+```json
+{
+   "filterSettings": {
+      "TBM_SMOOTH_20": [
+         0.73,
+         0.78
+      ]
+   }
+}
+```
+
+
 
 ## TSV File Format
 The TSV (Tab-Separated Values) file used by traithorizon should adhere to the following format: 
