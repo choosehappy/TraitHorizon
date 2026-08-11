@@ -36,7 +36,7 @@ traithorizon examples/imgs examples/tubule_example.tsv
 ```
 
 Video demo:
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/sk-AHsd7A2g?si=7akaAAG6UeEyBOwp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/sk-AHsd7A2g?si=5x3rYoW24qSsA6rA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 This demo features [custom filter](importing-filters) being imported into the TraitHorizon user interface. The filtered dataset highlights a subpopulation of histologic objects with low TBM_SMOOTH_20, a quantitative feature. By isolating the histologic objects of interest, their corresponding features and images can be evaluated for biological or quality-related patterns.
 
