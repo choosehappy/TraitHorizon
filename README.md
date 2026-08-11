@@ -8,5 +8,9 @@
 The official documentation for TraitHorizon can be found here:
 [TraitHorizon Documentation](https://traithorizon.readthedocs.io/en/latest/).
 
+## Community Guidelines
+If you encounter a bug or have a feature request, please open an issue on [GitHub Issues](../../issues). Contributions are welcome via [Pull Requests](../../pulls)—please be respectful and constructive in your interactions with others.
+
+
 ## License
 This project is licensed under The Clear BSD License. See the [LICENSE](LICENSE.txt) file for details.
