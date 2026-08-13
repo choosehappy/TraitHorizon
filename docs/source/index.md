@@ -10,9 +10,9 @@
 - Interactive parallel coordinate plots for feature exploration.
 - Support for data with image URLs.
 
-## Contributing
+## Community Guidelines
+If you encounter a bug or have a feature request, please open an issue on [GitHub Issues](../../issues). Contributions are welcome via [Pull Requests](../../pulls)—please be respectful and constructive in your interactions with others.
 
-Contributions are welcome! Feel free to fork the repository, make improvements, and submit pull requests.
 
 ## License
 
