@@ -144,4 +144,4 @@ Research reported in this publication was supported by:
 (3) Additional support was also provided by NephCure and the Henry E. Haller, Jr. Foundation; 
 (4) Funding for the CureGN consortium is provided by U24DK100845, U01DK100846, U01DK100876, U01DK100866, and U01DK100867 from the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK). Patient recruitment is supported by NephCure. Dates of funding for first phase of CureGN was 9/16/2013-5/31/2019. Dates of funding for the second phase of CureGN was 6/1/2019 - 5/31/2024. Date for the fundings for the third phase of CureGN are 6/1/2024-5/31/2029
 
-# 7. References
+# 8. References
