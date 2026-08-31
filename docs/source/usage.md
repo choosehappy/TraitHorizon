@@ -41,7 +41,7 @@ Video demo:
 This demo features [custom filter](importing-filters) being imported into the TraitHorizon user interface. The filtered dataset highlights a subpopulation of histologic objects with low TBM_SMOOTH_20, a quantitative feature. By isolating the histologic objects of interest, their corresponding features and images can be evaluated for biological or quality-related patterns.
 
 ## Applying sorting
-Quantitative features can be sorted within the data grid by clicking on the corresponding colunns in the grid header.
+Quantitative features can be sorted within the data grid by clicking on the corresponding columns in the grid header.
 
 ## Applying manual filters
 Filters can be applied manually by holding down your left mouse button and dragging along an axis within the parallel coordinates plot. Conversely, click the axis to clear an individual filter. Refreshing the page will reset all filters.
