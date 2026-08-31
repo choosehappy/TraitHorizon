@@ -1,6 +1,8 @@
 # Welcome to TraitHorizon's Documentation!
 
-**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. It combines a parallel coordinate plot with a data table to provide an interactive interface for exploring your data.
+**TraitHorizon** is a Flask application designed for visualizing images alongside arbitrary numerical features. It combines a parallel coordinate plot with a data table to provide an interactive interface for exploring your data. 
+
+Researchers and pathologists may find TraitHorizon useful for exploring digital pathology datasets, which can contain hundreds of thousands of histologic objects (e.g., renal tubules) paired with high-dimensional feature vectors. An example use case is presented in [JOSS paper](../../paper/paper.pdf).
 
 ![TraitHorizon Screenshot](./_static/images/TH_screenshot.png)
 
