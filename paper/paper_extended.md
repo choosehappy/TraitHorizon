@@ -1,36 +1,23 @@
 ---
 title: 'TraitHorizon: Scalable Exploration of Large Image-Feature Paired Datasets'
-tags:
-    - biomedical imaging
-    - visualization
-    - quality control
-authors:
-- name: Jackson Jacobs
-  orcid: 0009-0002-7386-6596
-  equal-contrib: true
-  affiliation: "1"
-- name: Fan Fan
-  orcid: 0009-0006-8897-5348
-  equal-contrib: true
-  affiliation: "1"
-- name: Laura Barisoni
-  orcid: 0000-0003-0848-9683
-  affiliation: "2, 3"
-- name: Andrew Janowczyk
-  orcid: 0000-0003-2982-4321
-  corresponding: true
-  affiliation: "1, 4, 5"
-affiliations:
-- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
-  index: 1
-- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
-  index: 2
-- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
-  index: 3
-- name: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
-  index: 4
-- name: Division of Clinical Pathology, Department of Diagnostics, University Hospital of Geneva, Geneva, Switzerland
-  index: 5
+author:
+  - Jackson Jacobs:
+      institute: bme
+      equal_contributor: "yes"
+  - Fan Fan:
+      institute: bme
+      equal_contributor: "yes"
+  - Laura Barisoni:
+      institute: [path, neph]
+  - Andrew Janowczyk:
+      institute: [bme, onc, clinpath]
+      correspondence: "yes"
+institute:
+  - bme: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
+  - path: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
+  - neph: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
+  - onc: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
+  - clinpath: Division of Clinical Pathology, Department of Diagnostics, University Hospital of Geneva, Geneva, Switzerland
 date: 11 November 2025
 bibliography: paper.bib
 ---
