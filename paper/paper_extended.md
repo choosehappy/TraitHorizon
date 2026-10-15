@@ -1,36 +1,23 @@
 ---
 title: 'TraitHorizon: Scalable Exploration of Large Image-Feature Paired Datasets'
-tags:
-    - biomedical imaging
-    - visualization
-    - quality control
-authors:
-- name: Jackson Jacobs
-  orcid: 0009-0002-7386-6596
-  equal-contrib: true
-  affiliation: "1"
-- name: Fan Fan
-  orcid: 0009-0006-8897-5348
-  equal-contrib: true
-  affiliation: "1"
-- name: Laura Barisoni
-  orcid: 0000-0003-0848-9683
-  affiliation: "2, 3"
-- name: Andrew Janowczyk
-  orcid: 0000-0003-2982-4321
-  corresponding: true
-  affiliation: "1, 4, 5"
-affiliations:
-- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
-  index: 1
-- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
-  index: 2
-- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
-  index: 3
-- name: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
-  index: 4
-- name: Division of Clinical Pathology, Department of Diagnostics, University Hospital of Geneva, Geneva, Switzerland
-  index: 5
+author:
+  - Jackson Jacobs:
+      institute: bme
+      equal_contributor: "yes"
+  - Fan Fan:
+      institute: bme
+      equal_contributor: "yes"
+  - Laura Barisoni:
+      institute: [path, neph]
+  - Andrew Janowczyk:
+      institute: [bme, onc, clinpath]
+      correspondence: "yes"
+institute:
+  - bme: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
+  - path: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
+  - neph: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
+  - onc: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
+  - clinpath: Division of Clinical Pathology, Department of Diagnostics, University Hospital of Geneva, Geneva, Switzerland
 date: 11 November 2025
 bibliography: paper.bib
 ---
@@ -51,7 +38,7 @@ However, to date, this investigatory workflow remains time-intensive due to thre
 2. **Exploring each subpopulation incurs high time cost.** Biomedical imaging datasets often include heterogeneous subpopulations—such as tissue types, disease subtypes, or experimental conditions—that warrant the generation of separate visualizations for detailed inspection. Manually plotting each subpopulation becomes inefficient in repetitive workflows, while programmatic (e.g., loop-based) plot generation requires subpopulations of interest to be identified and well-defined *a priori*. Dynamic filtering and responsive plots are necessary for users to iteratively explore subpopulations without incurring substantial time costs from repeated plot generation and review. Furthermore, the conditions/filters used to identify them should be easy to document, save, and reapply.
 3. **Latency while rendering large datasets disrupts analysis.** OOI-feature datasets can easily reach hundreds of thousands of data points. When subpopulations are not yet clearly defined, a "global" view of the entire dataset is required before smaller subpopulations can be explored. Browser-based tools not designed for plotting at this scale can suffer from heavy memory utilization, latency, and even unresponsiveness/browser crashes while rendering such data visualizations. A capable visualization tool must leverage rendering techniques that remain efficient and within browser limitations as the number of objects scales. 
 
-These limiting factors motivate the development of interactive data visualization tools that can dynamically generate visualizations as the user explores their data. However, existing tools do not fully address all three limiting factors simultaneously. TensorBoard Projector [@9] and HoloViews [@10] support interactive plotting of large multivariate datasets but do not provide for image viewing. Conversely, DendroMap [@11] facilitates qualitative exploration of large sets of images but does not link back to their feature vectors. These tools also do not natively support dynamic filtering by feature value. HistoQC [@12] provides image-linked plots and metrics, but it is tailored specifically to quality control use cases in digital pathology and thus does not support arbitrary user-defined features vectors or images.
+These limiting factors motivate the development of interactive data visualization tools that can dynamically generate visualizations as the user explores their data. However, existing tools do not fully address all three limiting factors simultaneously. TensorBoard Projector [@9] and HoloViews [@10] support interactive plotting of large multivariate datasets but do not provide for image viewing. Conversely, DendroMap [@11] facilitates qualitative exploration of large sets of images but does not link back to their feature vectors. These tools also do not natively support dynamic filtering by feature value. HistoQC [@12] provides image-linked plots and metrics, but it is tailored specifically to quality control use cases in digital pathology and thus does not support arbitrary user-defined feature vectors or images.
 
 To address these gaps, we introduce TraitHorizon, a browser-based application for interactive exploration of images alongside their feature vectors. TraitHorizon (a) directly links plotted data points to their source object images, enabling rapid validation and interpretation, (b) supports dynamic, multi-dimensional filtering with support for saving and loading filter configurations, and (c) efficiently renders hundreds of thousands of data points in-browser. By doing so, TraitHorizon facilitates efficient exploratory analysis in object-based research workflows.
 
@@ -89,7 +76,7 @@ After starting the TraitHorizon server, a local URL (e.g., http://localhost:5000
 Initial exploration began with the parallel coordinates plot, which provided a global view of feature distributions across hundreds of thousands of tubules (\autoref{fig:1}-A). By plotting the N-dimensional feature vector of each OOI as a continuous line intersecting N respective axes, the parallel coordinates plot preserves both the full dimensionality of feature vectors (unlike dimensionally-reduced scatter plots) and the relationships between intra-OOI feature values (unlike marginal views such as violin plots). When hovering over a feature axis, a violin plot is displayed (\autoref{fig:1}-B), enabling distribution visualization and noting of properties such as skewness and normality. Here, when hovering over the feature `TBM_THICK_MAX` (maximum tubular basement membrane thickness), the violin plot revealed a strongly skewed distribution. This suggested the presence of tubules with extremal values, which required closer examination in the data grid (\autoref{fig:1}-C) for qualitative assessment. Together, these visualizations help users quickly identify whether features are broadly consistent, contain outliers, or show irregular patterns that may reflect artifacts or biologically distinct characteristics.
 
 ## 4.4. Filtering Based on Feature(s)
-TraitHorizon’s interactive filtering feature allows users to isolate and inspect data subpopulation based on feature values. For example, we filtered tubules with high `TBM_THICK_MAX` values (maximum tubular basement membrane thickness) by dragging a brush [@15] along the corresponding axis in the parallel coordinate plot (\autoref{fig:2} – green box). The filtering action highlighted the relevant instances (tubules) in red and displayed their rows in the data grid, where we observed that these tubules consistently showed thickened basement membranes (large green segments), a hallmark of atrophic tubules.
+TraitHorizon’s interactive filtering feature allows users to isolate and inspect data subpopulations based on feature values. For example, we filtered tubules with high `TBM_THICK_MAX` values (maximum tubular basement membrane thickness) by dragging a brush [@15] along the corresponding axis in the parallel coordinate plot (\autoref{fig:2} – green box). The filtering action highlighted the relevant instances (tubules) in red and displayed their rows in the data grid, where we observed that these tubules consistently showed thickened basement membranes (large green segments), a hallmark of atrophic tubules.
 
 ![Interactive filtering with only one feature. TraitHorizon allows users to interactively filter instances based on any feature shown in the parallel coordinates plot. In this example, we hovered over the axis for the feature `TBM_THICK_MAX` (maximum basement membrane thickness) and dragged a brush to isolate tubules with values in the range from 30 to 40. In the parallel coordinate plot, 119 instances were dynamically highlighted in red after filtering (with this number indicated in the status bar), while all other ones remained visible but are greyed out. This color contrast makes it easier to visually compare the selected subset with the rest of the dataset across all other features. As shown here, the selected tubules were associated with visibly thickened basement membranes (enlarged green segments). Such interactive visualization enables users to explore and validate morphological patterns interactively. When hovering over a feature axis, a violin plot is generated for the selected subset (in red), providing an overview of feature-value distributions. In the data grid, only the filtered instances are shown.\label{fig:2}](figures/Picture2.png)
 
@@ -123,12 +110,12 @@ Importantly, this search capability is not restricted to quality control indicat
 
 TraitHorizon also supports sorting of numerical features directly within the data grid by clicking on a column header (\autoref{fig:7}). In our workflow, we sorted tubules by `TBM_AREA` (tubular basement membrane area) to explore morphological variation. Scrolling through the sorted grid revealed a clear gradient in morphology—specifically, progressive thickening of the basement membrane—enabling intuitive observation of trends from normal to atrophic tubules.
 
-# 5. Dicussion and Conclusions
+# 5. Discussion and Conclusions
 TraitHorizon addresses a critical gap in image-based data analysis by enabling fast, interactive, and image-linked exploration of high dimensional feature datasets. Traditional visualization approaches often fail to couple image data with derived features and support interactive plotting at scale. In contrast, TraitHorizon links each source image to its high dimensional feature vector, supports real-time interactive filtering and sorting, and utilizes efficient rendering strategies to scale to datasets with hundreds of thousands of images.  
 
 TraitHorizon's modular implementation is well suited for future development to improve existing limitations. For instance, (a) making the parallel coordinates plot resizable and adding style customization options would allow for user adjustments to alleviate overplotting, and (b) adding an enlarged image view would make image inspection more convenient.
 
-TraitHorizon’s features empower researchers to discover meaningful patterns, perform quality control, and generate insights for large object-feature datasets. Furthermore, TraitHorizon’s support for arbitrary features, multiple feature types, and external URLs enable its broad use across multiple computational imaging fields.  
+TraitHorizon’s features empower researchers to discover meaningful patterns, perform quality control, and generate insights for large object-feature datasets. Furthermore, TraitHorizon’s support for arbitrary features, multiple feature types, and external URLs enables its broad use across multiple computational imaging fields.  
 
 TraitHorizon is available as a python package, and a Docker image is released for easy installation ([https://traithorizon.com/](https://traithorizon.com/)).
 
