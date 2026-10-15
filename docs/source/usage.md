@@ -113,7 +113,7 @@ sphinx-autobuild docs/source docs/_build/html
 
 Then follow the link provided in the terminal to view the docs in your web browser.
 
-## Building the Paper PDF locally
+## Building paper.pdf locally
 Run this command in the TraitHorizon directory to build the paper PDF locally:
 
 ```bash
@@ -121,3 +121,12 @@ docker run --rm --volume $PWD/paper:/data --user $(id -u):$(id -g) --env JOURNAL
 ```
 
 Once complete, the paper will be located at `paper/paper.pdf`
+
+## Building paper_extended.pdf locally
+The extended paper is formatted generically as it was not peer-reviewed by the Journal of Open Source Software.
+
+Pandoc is required to generate the pdf document.
+
+```bash
+pandoc paper_extended.md --lua-filter=utils/scholarly-metadata.lua --lua-filter=utils/author-info-blocks.lua --citeproc --bibliography=paper.bib --pdf-engine=xelatex -V geometry:margin=1in -o paper_extended.pdf
+```
