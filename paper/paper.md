@@ -21,11 +21,11 @@ authors:
   corresponding: true
   affiliation: "1, 4, 5"
 affiliations:
-- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
+- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, United States
   index: 1
-- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
+- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, United States
   index: 2
-- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
+- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, United States
   index: 3
 - name: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
   index: 4
