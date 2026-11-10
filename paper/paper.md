@@ -21,11 +21,11 @@ authors:
   corresponding: true
   affiliation: "1, 4, 5"
 affiliations:
-- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, United States
+- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, United States of America
   index: 1
-- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, United States
+- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, United States of America
   index: 2
-- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, United States
+- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, United States of America
   index: 3
 - name: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
   index: 4
@@ -93,7 +93,7 @@ TraitHorizon also supports exact-value search (\autoref{fig:6}), sorting feature
 
 # Research impact statement
 
-TraitHorizon has already been leveraged in two published studies, where our collaborators investigated tubular pathomics in kidney disease. In Fan et al. [@2], we used TraitHorizon to perform quality control and exploratory analysis of 260,201 segmented tubules and 99 pathomic features, uncovering morphological patterns along a trajectory from normal to atrophic tubules that were subsequently validated by study pathologists and found to be clinically relevant. In Ambekar et al. [@5], we similarly used TraitHorizon for quality control of glomerular pathomic features in a study of minimal change disease and focal segmental glomerulosclerosis. In both studies, TraitHorizon enabled rapid identification of segmentation artifacts and biologically meaningful subpopulations that would have been impractical to discover using static visualization methods. The follow-up studies are as well taking advantage of its employ, as well as 7 others we are leading. A travel grant was awarded for the presentation of Traithorizon at the annual Kidney Precision Medicine Project meeting, with the intent of broading its dissemination.
+TraitHorizon has already been leveraged in two published studies, where our collaborators investigated tubular pathomics in kidney disease. In Fan et al. [@2], we used TraitHorizon to perform quality control and exploratory analysis of 260,201 segmented tubules and 99 pathomic features, uncovering morphological patterns along a trajectory from normal to atrophic tubules that were subsequently validated by study pathologists and found to be clinically relevant. In Ambekar et al. [@5], we similarly used TraitHorizon for quality control of glomerular pathomic features in a study of minimal change disease and focal segmental glomerulosclerosis. In both studies, TraitHorizon enabled rapid identification of segmentation artifacts and biologically meaningful subpopulations that would have been impractical to discover using static visualization methods. The follow-up studies are taking advantage of its employ, as well as 7 other studies we are leading. A travel grant was awarded for the presentation of TraitHorizon at the annual Kidney Precision Medicine Project meeting, with the intent of broadening its dissemination.
 
 # AI usage disclosure
 
