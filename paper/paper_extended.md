@@ -124,10 +124,11 @@ TraitHorizon is available as a python package, and a Docker image is released fo
 No generative AI tools were used in the development of the TraitHorizon software or for writing the original manuscript. Claude Opus 4 (Anthropic) was used solely to assist with restructuring and condensing the manuscript to meet the updated JOSS format and word limit requirements. Github Copilot was used to convert the TraitHorizon documentation from .rst format to markdown. All AI-generated text was reviewed, edited, and validated by the authors, who made all decisions regarding scientific content and framing.
 
 # 7. Acknowledgements
+
 Research reported in this publication was supported by: 
 
 (1) the National Institutes of Health (NIH) under the following awards: R01LM013864 and R01DK118431;  
-(2) The Nephrotic Syndrome Study Network (NEPTUNE) is part of the Rare Diseases Clinical Research Network (RDCRN), which is funded by the NIH and led by the National Center for Advancing Translational Sciences (NCATS) through its Division of Rare Diseases Research Innovation (DRDRI). NEPTUNE is funded under grant number U54DK083912 as a collaboration between NCATS and the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK). Additional funding and/or programmatic support is provided by the University of Michigan, NephCure Kidney International, Alport Syndrome Foundation, and the Halpin Foundation. RDCRN consortia are supported by the RDCRN Data Management and Coordinating Center (DMCC), funded by NCATS and the National Institute of Neurological Disorders and Stroke (NINDS) under U2CTR002818; 
+(2) The Nephrotic Syndrome Study Network (NEPTUNE) is part of the Rare Diseases Clinical Research Network (RDCRN) with programmatic support provided by the NIH, University of Michigan, NephCure, Alport syndrome Foundation, and NEPTUNE Pre-Competitive Public-Private Partnership Platform (NP5) industry sponsors.
 (3) Additional support was also provided by NephCure and the Henry E. Haller, Jr. Foundation; 
 (4) Funding for the CureGN consortium is provided by U24DK100845, U01DK100846, U01DK100876, U01DK100866, and U01DK100867 from the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK). Patient recruitment is supported by NephCure. Dates of funding for first phase of CureGN was 9/16/2013-5/31/2019. Dates of funding for the second phase of CureGN was 6/1/2019 - 5/31/2024. Date for the fundings for the third phase of CureGN are 6/1/2024-5/31/2029
 
