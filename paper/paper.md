@@ -21,11 +21,11 @@ authors:
   corresponding: true
   affiliation: "1, 4, 5"
 affiliations:
-- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, USA
+- name: Department of Biomedical Engineering, Emory University and Georgia Institute of Technology, Atlanta, Georgia, United States of America
   index: 1
-- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, USA
+- name: Department of Pathology, Division of AI and Computational Pathology, Duke University, Durham, North Carolina, United States of America
   index: 2
-- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, USA
+- name: Department of Medicine, Division of Nephrology, Duke University, Durham, North Carolina, United States of America
   index: 3
 - name: Division of Precision Oncology, Department of Oncology, University Hospital of Geneva, Geneva, Switzerland
   index: 4
@@ -93,7 +93,7 @@ TraitHorizon also supports exact-value search (\autoref{fig:6}), sorting feature
 
 # Research impact statement
 
-TraitHorizon has already been leveraged in two published studies, where our collaborators investigated tubular pathomics in kidney disease. In Fan et al. [@2], we used TraitHorizon to perform quality control and exploratory analysis of 260,201 segmented tubules and 99 pathomic features, uncovering morphological patterns along a trajectory from normal to atrophic tubules that were subsequently validated by study pathologists and found to be clinically relevant. In Ambekar et al. [@5], we similarly used TraitHorizon for quality control of glomerular pathomic features in a study of minimal change disease and focal segmental glomerulosclerosis. In both studies, TraitHorizon enabled rapid identification of segmentation artifacts and biologically meaningful subpopulations that would have been impractical to discover using static visualization methods. The follow-up studies are as well taking advantage of its employ, as well as 7 others we are leading. A travel grant was awarded for the presentation of Traithorizon at the annual Kidney Precision Medicine Project meeting, with the intent of broading its dissemination.
+TraitHorizon has already been leveraged in two published studies, where our collaborators investigated tubular pathomics in kidney disease. In Fan et al. [@2], we used TraitHorizon to perform quality control and exploratory analysis of 260,201 segmented tubules and 99 pathomic features, uncovering morphological patterns along a trajectory from normal to atrophic tubules that were subsequently validated by study pathologists and found to be clinically relevant. In Ambekar et al. [@5], we similarly used TraitHorizon for quality control of glomerular pathomic features in a study of minimal change disease and focal segmental glomerulosclerosis. In both studies, TraitHorizon enabled rapid identification of segmentation artifacts and biologically meaningful subpopulations that would have been impractical to discover using static visualization methods. The follow-up studies are taking advantage of its employ, as well as 7 other studies we are leading. A travel grant was awarded for the presentation of TraitHorizon at the annual Kidney Precision Medicine Project meeting, with the intent of broadening its dissemination.
 
 # AI usage disclosure
 
@@ -104,7 +104,7 @@ No generative AI tools were used in the development of the TraitHorizon software
 Research reported in this publication was supported by: 
 
 (1) the National Institutes of Health (NIH) under the following awards: R01LM013864 and R01DK118431;  
-(2) The Nephrotic Syndrome Study Network (NEPTUNE) is part of the Rare Diseases Clinical Research Network (RDCRN), which is funded by the NIH and led by the National Center for Advancing Translational Sciences (NCATS) through its Division of Rare Diseases Research Innovation (DRDRI). NEPTUNE is funded under grant number U54DK083912 as a collaboration between NCATS and the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK). Additional funding and/or programmatic support is provided by the University of Michigan, NephCure Kidney International, Alport Syndrome Foundation, and the Halpin Foundation. RDCRN consortia are supported by the RDCRN Data Management and Coordinating Center (DMCC), funded by NCATS and the National Institute of Neurological Disorders and Stroke (NINDS) under U2CTR002818; 
+(2) The Nephrotic Syndrome Study Network (NEPTUNE) is part of the Rare Diseases Clinical Research Network (RDCRN) with programmatic support provided by the NIH, University of Michigan, NephCure, Alport syndrome Foundation, and NEPTUNE Pre-Competitive Public-Private Partnership Platform (NP5) industry sponsors.
 (3) Additional support was also provided by NephCure and the Henry E. Haller, Jr. Foundation; 
 (4) Funding for the CureGN consortium is provided by U24DK100845, U01DK100846, U01DK100876, U01DK100866, and U01DK100867 from the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK). Patient recruitment is supported by NephCure. Dates of funding for first phase of CureGN was 9/16/2013-5/31/2019. Dates of funding for the second phase of CureGN was 6/1/2019 - 5/31/2024. Date for the fundings for the third phase of CureGN are 6/1/2024-5/31/2029
 
