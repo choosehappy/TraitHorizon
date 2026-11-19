@@ -15,4 +15,4 @@ If you encounter a bug or have a feature request, please open an issue on [GitHu
 
 
 ## License
-This project is licensed under The Clear BSD License. See the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the 3-Clause BSD License. See the [LICENSE](LICENSE.txt) file for details.
